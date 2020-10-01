@@ -35,4 +35,16 @@ export default {
   height: 100vh;
   grid-template-rows: auto 1fr auto;
 }
+
+.inputs-button-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+.inputs-button-wrap input {
+    margin: 0.5rem 0;
+}
+.inputs-button-wrap button {
+    width: 100%;
+}
 </style>

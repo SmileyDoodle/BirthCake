@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-// import LoginPage from '../views/LoginPage.vue'
-// import SigninPage from '../views/SigninPage.vue'
-// import InformationPage from '../views/InformationPage.vue'
+import firebase from 'firebase'
 
 
 
@@ -28,19 +26,33 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/LoginPage.vue')
   },
   {
-    path: '/signin',
-    name: 'SigninPage',
-    component: () => import('../views/SigninPage.vue')
+    path: '/signup',
+    name: 'SignupPage',
+    component: () => import('../views/SignupPage.vue')
   },
   {
     path: '/information',
     name: 'InformationPage',
-    component: () => import('../views/InformationPage.vue')
+    component: () => import('../views/InformationPage.vue'),
+    meta: { requiresAuth: true }
   },
 ]
 
 const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
   routes
 })
-
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const isAuthenticated = firebase.auth().currentUser
+  if(isAuthenticated && to.path === '/') {
+    next('/information')
+  }
+  if (requiresAuth && !isAuthenticated) {
+    next('/login')
+  } else {
+    next()
+  }
+})
 export default router

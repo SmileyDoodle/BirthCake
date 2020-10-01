@@ -23,7 +23,7 @@
             type="password"
             placeholder="Repeat password"
           />
-          <button class="button is-rounded">Sign in</button>
+          <button class="button is-rounded" @click="register">Sign up</button>
         </form>
       </div>
       <p>Have an account? <router-link to="/login" class="account">Login</router-link> </p>
@@ -39,7 +39,6 @@
 <script>
 export default {
   name: 'RegisterPage',
-
   data() {
     return {
       email: "",
@@ -47,11 +46,11 @@ export default {
       secret: false
     }
   },
-//   methods: {
-//     register() {
-//         this.secret = true;
-//     }
-//   },
+  methods: {
+    register() {
+        this.secret = true;
+    }
+  },
 }
 </script>
 

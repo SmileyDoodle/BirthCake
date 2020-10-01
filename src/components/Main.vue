@@ -6,7 +6,7 @@
         </div>
         <div>
             <button class="button is-rounded"><router-link to="/login">Login</router-link></button>
-            <button class="button is-rounded"><router-link to="/signin">Sign in</router-link></button>
+            <button class="button is-rounded"><router-link to="/signup">Sign up</router-link></button>
         </div>
         <div class="img-wrap">
             <img alt="bear" src="../assets/images/bear.jpg"> 
