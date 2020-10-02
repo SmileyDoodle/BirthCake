@@ -39,12 +39,20 @@ export default {
 .inputs-button-wrap {
     display: flex;
     justify-content: center;
-    margin: 2rem 0;
+    align-items: center;
+    margin: 2rem auto;
+}
+.inputs-button-wrap form {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 .inputs-button-wrap input {
-    margin: 0.5rem 0;
+    margin: 0.2rem 0;
 }
 .inputs-button-wrap button {
     width: 100%;
+    margin: 0.2rem 0;
 }
 </style>

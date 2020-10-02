@@ -1,11 +1,15 @@
 <template>
   <header>
-      <div class="navbar-burger" @click="showNav = !showNav" :class="{ 'is-active': showNav }">
+      <div 
+      class="navbar-burger" 
+      @click="showNav = !showNav" 
+      :class="{ 'is-active': showNav, 'do-not-show': ($route.path==='/' || $route.path==='/signup' || $route.path==='/login') }"
+      >
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
-     </div>
-     <!--
+      </div>
+    <!--
     Using the v-bind: directive to reactively update the class attribute 'is-active' based on the showNav property.
     -->
     <div 
@@ -54,5 +58,8 @@ export default {
 <style>
 #header {
     height: 150px;
+}
+.do-not-show {
+  visibility: hidden;
 }
 </style>

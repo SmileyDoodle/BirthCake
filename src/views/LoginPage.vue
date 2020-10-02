@@ -19,6 +19,18 @@
             v-model="password"
           />
           <button class="button is-rounded" @click="login" type="button">Login</button>
+          <button class="button is-rounded is-facebook social-button" @click="login" type="button">
+            <span class="icon">
+              <i class="fab fa-facebook"></i>
+            </span>
+            <span>Facebook</span>
+          </button>
+          <button class="button is-rounded is-google social-button" @click="login" type="button"> 
+            <span class="icon">
+              <i class="fab fa-google"></i>
+            </span>
+            <span>Google</span>
+          </button>
         </form>
       </div>
       <p>Need an account? <router-link to="/signup" class="account">Sign up</router-link></p>
@@ -30,6 +42,9 @@
 import firebase from 'firebase/app'
 import 'firebase/auth' 
 import 'firebase/firestore'
+import 'bulma/css/bulma.min.css'
+import '@fortawesome/fontawesome-free/css/all.min.css'
+import 'bulma-social/bin/bulma-social.min.css'
 
 export default {
   name: 'LoginPage',
@@ -71,5 +86,11 @@ export default {
 </script>
 
 <style>
-
+.is-facebook {
+  margin-top: 1rem !important;
+}
+.is-google {
+  color: #fff;
+  background-color: #4285F4;
+}
 </style>
