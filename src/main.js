@@ -4,6 +4,12 @@ import router from './router'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
+import VCalendar from 'v-calendar';
+
+// Use v-calendar & v-date-picker components
+Vue.use(VCalendar, {
+  componentPrefix: 'vc',  // Use <vc-calendar /> instead of <v-calendar />
+});
 
 Vue.config.productionTip = false
 

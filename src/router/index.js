@@ -36,6 +36,18 @@ const routes = [
     component: () => import('../views/InformationPage.vue'),
     meta: { requiresAuth: true }
   },
+  {
+    path: '/detail',
+    name: 'SinglePage',
+    component: () => import('../views/SinglePage.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/edit',
+    name: 'EditPage',
+    component: () => import('../views/EditPage.vue'),
+    meta: { requiresAuth: true }
+  },
 ]
 
 const router = new VueRouter({
