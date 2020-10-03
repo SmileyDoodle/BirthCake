@@ -3,27 +3,12 @@
     <div  class="column is-two-thirds">
       <h1>Hello</h1>
       <div class="inputs-button-wrap">
-        <form v-if="!secret" autocomplete="off">
-          <input
-            class="button is-rounded column"
-            name="email"
-            placeholder="Email"
-            v-model="email"
-          />
-          <input
-            class="button is-rounded column"
-            name="password"
-            type="password"
-            placeholder="Password"
-            v-model="password"
-          />
-          <input
-            class="button is-rounded column"
-            name="password"
-            type="password"
-            placeholder="Repeat password"
-          />
-          <button class="button is-rounded" @click="register">Sign up</button>
+         <div>
+          <div class="secret">
+            <p>Use these credentials to login:</p>
+            <p> email: john.doe@gmail.com </p>
+            <p> password: abc123 </p>
+          </div>
           <button class="button is-rounded is-facebook social-button" @click="signupFacebook">
             <span class="icon">
               <i class="fab fa-facebook"></i>
@@ -36,14 +21,9 @@
             </span>
             <span>Google</span>
           </button>
-        </form>
+         </div>
       </div>
       <p>Have an account? <router-link to="/login" class="account">Login</router-link> </p>
-      <div v-if="secret" class="secret">
-        <p>Use these credentials to login:</p>
-        <p> email: john.doe@gmail.com </p>
-        <p> password: abc123 </p>
-      </div>
     </div>
   </div>
 </template>
@@ -62,7 +42,6 @@ export default {
     return {
       email: "",
       password: "",
-      secret: false
     }
   },
   methods: {
@@ -70,37 +49,44 @@ export default {
         this.secret = true;
     },
     signupGoogle() {
-        let provider = new firebase.auth.GoogleAuthProvider();
-
-        firebase.auth().signInWithPopup(provider).then((result) =>  {
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          // eslint-disable-next-line no-unused-vars
-          let token = result.credential.accessToken;
-          // The signed-in user info.
-          // eslint-disable-next-line no-unused-vars
-          let user = result.user;
-          this.$router.push({ path: 'information' });
-          // ...
-        }).catch(function(error) {
-          console.log("tell me the err", error)
-          // Handle Errors here.
-          // eslint-disable-next-line no-unused-vars
-          let errorCode = error.code;
-          // eslint-disable-next-line no-unused-vars
-          let errorMessage = error.message;
-          // The email of the user's account used.
-          // eslint-disable-next-line no-unused-vars
-          let email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          // eslint-disable-next-line no-unused-vars
-          let credential = error.credential;
-          // ...
-        });
+       var provider = new firebase.auth.GoogleAuthProvider();
+       firebase.auth().signInWithRedirect(provider);
     },
     signupFacebook() {
-      
+      let provider = new firebase.auth.FacebookAuthProvider();
+      firebase.auth().signInWithRedirect(provider);
     }
   },
+  mounted() {
+    firebase.auth().getRedirectResult().then((result) => {
+          if (result.credential) {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            // eslint-disable-next-line no-unused-vars
+            var token = result.credential.accessToken;
+            // ...
+            console.log('token ', token);
+            console.log('result.user ', result.user);
+            this.$router.push({ path: 'information' });
+          }
+          // The signed-in user info.
+          // eslint-disable-next-line no-unused-vars
+          var user = result.user;
+        }).catch(function(error) {
+            console.log('error ', error);
+          // Handle Errors here.
+          // eslint-disable-next-line no-unused-vars
+          var errorCode = error.code;
+          // eslint-disable-next-line no-unused-vars
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          // eslint-disable-next-line no-unused-vars
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          // eslint-disable-next-line no-unused-vars
+          var credential = error.credential;
+          // ...
+        });
+  }
 }
 </script>
 
