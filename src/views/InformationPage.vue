@@ -11,10 +11,13 @@
       <div class="dates-wrap">
         <div class="dates-lw-wrap">
           <ul>
-            <li>Topias</li>
-            <li>Mia</li>
+            <h3>Topias</h3>
+            <p>11 May 1989 / 31 y.o.</p>
           </ul>
         </div>
+      </div>
+      <div>
+        <button>+</button>
       </div>
   </div>
 </template>

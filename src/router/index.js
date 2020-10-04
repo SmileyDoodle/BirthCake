@@ -48,6 +48,12 @@ const routes = [
     component: () => import('../views/EditPage.vue'),
     meta: { requiresAuth: true }
   },
+  {
+    path: '/about',
+    name: 'About',
+    component: () => import('../views/About.vue'),
+    meta: { requiresAuth: true }
+  },
 ]
 
 const router = new VueRouter({
