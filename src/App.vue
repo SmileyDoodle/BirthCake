@@ -36,6 +36,9 @@ export default {
   grid-template-rows: auto 1fr auto;
 }
 
+a {
+  color: #2c3e50;
+}
 .inputs-button-wrap {
     display: flex;
     justify-content: center;

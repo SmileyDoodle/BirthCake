@@ -4,12 +4,12 @@
             <h1> BirthCake </h1>
             <p> Keep all the birthdays in one place </p>
         </div>
-        <div>
-            <button class="button is-rounded"><router-link to="/login">Login</router-link></button>
-            <button class="button is-rounded"><router-link to="/signup">Sign up</router-link></button>
-        </div>
         <div class="img-wrap">
-            <img alt="bear" src="../assets/images/bear.jpg"> 
+            <img alt="birthday" src="../assets/images/birthday.svg"> 
+        </div>
+        <div class="main-button">
+            <button class="button button-colour"><router-link to="/login">Login</router-link></button>
+            <button class="button"><router-link to="/signup">Sign up</router-link></button>
         </div>
     </div>
 </template>
@@ -30,14 +30,23 @@ export default {
     text-align: left;
 }
 .main-page h1 {
+    font-family: 'Maven Pro', sans-serif;
     font-size: 2.5rem;
 }
-.button {
-    margin: 0 1rem;
-}
 .img-wrap img { 
-    height: 80%;
-    width: 80%;
-    margin-top: 2rem;
+    height: 70%;
+    width: 70%;
+    margin-top: 1.5rem;
+}
+.main-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+    margin: 0 auto;
+}
+.button-colour {
+    margin: 2rem 0 0.5rem 0;
+    background-color: #dcc9cd;
 }
 </style> 

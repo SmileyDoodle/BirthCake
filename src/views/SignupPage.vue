@@ -1,21 +1,20 @@
 <template>
   <div class="register columns is-mobile is-centered">
     <div  class="column is-two-thirds">
-      <h1>Hello</h1>
       <div class="inputs-button-wrap">
          <div>
           <div class="secret">
             <p>Use these credentials to login:</p>
-            <p> email: john.doe@gmail.com </p>
-            <p> password: abc123 </p>
+            <p> <strong>email:</strong> john.doe@gmail.com </p>
+            <p> <strong>password:</strong> abc123 </p>
           </div>
-          <button class="button is-rounded is-facebook social-button" @click="signupFacebook">
+          <button class="button is-facebook social-button" @click="signupFacebook">
             <span class="icon">
               <i class="fab fa-facebook"></i>
             </span>
             <span>Facebook</span>
           </button>
-          <button class="button is-rounded is-google social-button" @click="signupGoogle">
+          <button class="button is-google social-button" @click="signupGoogle">
             <span class="icon">
               <i class="fab fa-google"></i>
             </span>
@@ -91,5 +90,7 @@ export default {
 </script>
 
 <style>
-
+.secret {
+  margin: 2rem 0;
+}
 </style>

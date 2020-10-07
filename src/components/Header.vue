@@ -12,7 +12,7 @@
                 class="arrow" 
                 src="../assets/images/arrow.svg" 
                 alt="back"  
-                :class="{'isHidden': ($route.path !=='/edit' && $route.path !=='/about')}"
+                v-if="$route.path !== '/information'"
               > 
             </router-link>
         </div>

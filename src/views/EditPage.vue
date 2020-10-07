@@ -8,40 +8,42 @@
             <img class="is-rounded avatar-img" src="https://bulma.io/images/placeholders/128x128.png" v-if="!url" />
             <img class="is-rounded" :src="url" v-if="url" />
         </figure>
-        <p>
-            <label for="name">Name</label>
-            <input
-            class="input is-rounded"
-            id="name"
-            v-model="name"
-            type="text"
-            name="name"
-            >
-        </p>
-        <p>
-            <label for="age">Date of birth</label>
-            <input
-            class="input is-rounded"
-            id="age"
-            v-model="date"
-            type="number"
-            name="date"
-            min="0"
-            >
-        </p>
+        <div class="edit-lp-wrap">
             <p>
-            <label for="age">Message</label>
-            <input
-            class="input is-rounded"
-            id="message"
-            v-model="message"
-            type="text"
-            name="message"
-            min="0"
-            >
-        </p>
+                <label for="name">Name</label>
+                <input
+                class="input"
+                id="name"
+                v-model="name"
+                type="text"
+                name="name"
+                >
+            </p>
+            <p>
+                <label for="age">Date of birth</label>
+                <input
+                class="input"
+                id="age"
+                v-model="date"
+                type="number"
+                name="date"
+                min="0"
+                >
+            </p>
+                <p>
+                <label for="age">Message</label>
+                <input
+                class="input"
+                id="message"
+                v-model="message"
+                type="text"
+                name="message"
+                min="0"
+                >
+            </p>
+        </div>
         <button
-        class="button is-rounded"
+        class="button"
         type="submit"
         > Submit 
         </button>
@@ -78,10 +80,18 @@ export default {
 .edit-wrap {
     display: flex;
     justify-content: center;
+    margin-top: 2rem;
+    text-align: left;
 }
 .figure {
     display: flex;
     justify-content: center;
     margin: 0 auto;
+}
+.edit-lp-wrap {
+    margin-top: 2rem;
+}
+.edit-lp-wrap p {
+    margin: 1rem 0;
 }
 </style>

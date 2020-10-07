@@ -1,31 +1,30 @@
 <template>
   <div class="login columns is-mobile is-centered">
     <div  class="column is-two-thirds">
-      <h1>Hello</h1>
       <div class="inputs-button-wrap">
         <form autocomplete="off">
           <input
-            class="button is-rounded column"
+            class="button column"
             name="email"
             type="email"
             placeholder="Email"
             v-model="email"
           />
           <input
-            class="button is-rounded column"
+            class="button column"
             name="password"
             type="password"
             placeholder="Password"
             v-model="password"
           />
-          <button class="button is-rounded" @click="login" type="button">Login</button>
-          <button class="button is-rounded is-facebook social-button" @click="signinFacebook" type="button">
+          <button class="button" @click="login" type="button">Login</button>
+          <button class="button is-facebook social-button" @click="signinFacebook" type="button">
             <span class="icon">
               <i class="fab fa-facebook"></i>
             </span>
             <span>Facebook</span>
           </button>
-          <button class="button is-rounded is-google social-button" @click="signinGoogle" type="button"> 
+          <button class="button is-google social-button" @click="signinGoogle" type="button"> 
             <span class="icon">
               <i class="fab fa-google"></i>
             </span>
