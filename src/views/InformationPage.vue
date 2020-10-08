@@ -4,9 +4,11 @@
         <vc-calendar 
           title-position="left"
           :attributes='currentDate'
+          class="restyle"
         >
         </vc-calendar>
       </div>
+      <hr class="customShadow">
       <div class="dates-wrap">
         <h3 class="has-text-weight-semibold">This month birthdays:</h3>
         <div class="dates-lp-wrap">
@@ -55,7 +57,18 @@ export default {
 .calendar-wrap {
   display: flex;
   justify-content: center;
-  margin: 1rem 0 2.5rem;
+  padding-bottom: 0;
+  margin-top: 1rem;
+  /* margin-bottom: 3rem !important; */
+}
+.customShadow {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.1), 0 0 0 0 rgba(10,10,10,.02);
+}
+.restyle {
+  border-style: none;
+  width: 80%;
 }
 .dates-wrap {
   display: flex;
