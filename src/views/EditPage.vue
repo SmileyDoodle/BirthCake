@@ -17,6 +17,7 @@
                 v-model="name"
                 type="text"
                 name="name"
+                placeholder="John Doe"
                 >
             </p>
             <p>
@@ -28,23 +29,25 @@
                 type="number"
                 name="date"
                 min="0"
+                placeholder="dd.mm.yyyy"
                 >
             </p>
                 <p>
                 <label for="age">Message</label>
-                <input
-                class="input"
-                id="message"
-                v-model="message"
-                type="text"
-                name="message"
-                min="0"
-                >
+                <textarea 
+                    class="textarea"
+                    id="message"
+                    v-model="message"
+                    type="text"
+                    name="message"
+                    min="0" 
+                    placeholder="I wish you....">
+                </textarea>
             </p>
         </div>
         <button
-        class="button"
-        type="submit"
+            class="button btn-submit"
+            type="submit"
         > Submit 
         </button>
       </div>
@@ -93,5 +96,8 @@ export default {
 }
 .edit-lp-wrap p {
     margin: 1rem 0;
+}
+.btn-submit {
+    background-color: #dcc9cd;
 }
 </style>

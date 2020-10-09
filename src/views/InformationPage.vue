@@ -24,9 +24,9 @@
             <div>
               <span class="has-text-weight-semibold">&#183;</span>
             </div>
-            <div class="birthday-name">
-              <h3>Zuzana</h3>
-              <p class="date-age">29 Oct 1991 - 24 y.o.</p>
+            <div class="birthday-name" v-for="user in users" :key="user.id">
+              <h3> {{user.name}} </h3>
+              <p class="date-age"> {{user.date}} </p>
             </div>
         </div>
       </div>
@@ -37,19 +37,50 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
+
 export default {
   name: 'InformationPage',
   data() {
-  return {
-    currentDate: [
-      {
-        key: 'today',
-        highlight: true,
-        dates: new Date()
-      }
-    ]
+    return {
+      currentDate: [
+        {
+          key: 'today',
+          highlight: true,
+          dates: new Date()
+        }
+      ],
+      users: []
+    }
+  },
+  created() {
+    var db = firebase.firestore();
+    
+    db.collection("users").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const data = {
+            'name': doc.data().name,
+            'date': doc.data().date
+          }
+          this.users.push(data);
+          console.log('users', this.users)
+            // console.log(`${doc.id} => ${doc.data()}`);
+            // this.users = doc.data();
+        });
+    });
+    // var docRef = db.collection("users");
+
+    // docRef.get().then(function(doc) {
+    //     if (doc.exists) {
+    //         console.log("Document data:", doc.data());
+    //     } else {
+    //         // doc.data() will be undefined in this case
+    //         console.log("No such document!");
+    //     }
+    // }).catch(function(error) {
+    //     console.log("Error getting document:", error);
+    // });
   }
-}
 }
 </script>
 
