@@ -5,13 +5,14 @@
           title-position="left"
           :attributes='currentDate'
           class="restyle"
+          @update:to-page="getTime($event)"
         >
         </vc-calendar>
       </div>
       <hr class="customShadow">
       <div class="dates-wrap">
         <h3 class="has-text-weight-semibold">This month birthdays:</h3>
-        <div class="dates-lp-wrap" v-for="user in users" :key="user.date">
+        <div class="dates-lp-wrap" v-for="user in users" :key="user.date" @click="goSingle(user.name)">
             <div>
               <span class="has-text-weight-semibold">&#183;</span>
             </div>
@@ -45,6 +46,14 @@ export default {
       users: [],
     }
   },
+  methods: {
+    goSingle(birthdayName) {
+     this.$router.push({ path: `single/${birthdayName}`});
+    },
+    getTime(payload) {
+      console.log('cal', payload);
+    }
+  },
   created() {
     let db = firebase.firestore();
   
@@ -63,19 +72,7 @@ export default {
             // this.users = doc.data();
         });
     });
-    // var docRef = db.collection("users");
-
-    // docRef.get().then(function(doc) {
-    //     if (doc.exists) {
-    //         console.log("Document data:", doc.data());
-    //     } else {
-    //         // doc.data() will be undefined in this case
-    //         console.log("No such document!");
-    //     }
-    // }).catch(function(error) {
-    //     console.log("Error getting document:", error);
-    // });
-  }
+  },
 }
 </script>
 
