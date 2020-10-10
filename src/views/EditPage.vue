@@ -18,6 +18,8 @@
                 type="text"
                 name="name"
                 placeholder="John Doe"
+                autocomplete="off"
+                required
                 >
             </p>
             <p>
@@ -26,10 +28,12 @@
                 class="input"
                 id="age"
                 v-model="date"
-                type="number"
+                type="date"
                 name="date"
                 min="0"
                 placeholder="dd.mm.yyyy"
+                autocomplete="off"
+                required
                 >
             </p>
                 <p>
@@ -41,13 +45,16 @@
                     type="text"
                     name="message"
                     min="0" 
-                    placeholder="I wish you....">
+                    placeholder="I wish you...."
+                    autocomplete="off"
+                    >
                 </textarea>
             </p>
         </div>
         <button
             class="button btn-submit"
             type="submit"
+            @click="saveUser()"
         > Submit 
         </button>
       </div>
@@ -55,18 +62,20 @@
 </template>
 
 <script>
+import firebase from 'firebase/app' 
+
 export default {
     name: 'EditPage',
     data() {
         return {
-            errors: [],
-            name: null,
-            date: null,
+            error: '',
+            name: '',
+            date: '',
             message: '',
-            url: null,
+            url: '',
         }
     },
-    methods:{
+    methods: {
         upload() {
             this.$refs.fileUpload.click();        
         },
@@ -74,6 +83,18 @@ export default {
           console.log(event.target.files);
           const file = event.target.files[0];
           this.url = URL.createObjectURL(file);
+        },
+        saveUser() {
+            let db = firebase.firestore();
+
+            db.collection("users").add({
+                name: this.name,
+                date: this.date,
+                message: this.message
+            })
+            // eslint-disable-next-line no-unused-vars
+            .then(docRef => this.$router.push('/information'))
+            .catch (error => console.log(error))                
         }
     }
 }

@@ -11,22 +11,13 @@
       <hr class="customShadow">
       <div class="dates-wrap">
         <h3 class="has-text-weight-semibold">This month birthdays:</h3>
-        <div class="dates-lp-wrap">
+        <div class="dates-lp-wrap" v-for="user in users" :key="user.date">
             <div>
               <span class="has-text-weight-semibold">&#183;</span>
             </div>
             <div class="birthday-name">
-              <h3>Topias</h3>
-              <p class="date-age">11 Oct 1989 - 31 y.o.</p>
-            </div>
-        </div>
-        <div class="dates-lp-wrap">
-            <div>
-              <span class="has-text-weight-semibold">&#183;</span>
-            </div>
-            <div class="birthday-name" v-for="user in users" :key="user.id">
               <h3> {{user.name}} </h3>
-              <p class="date-age"> {{user.date}} </p>
+              <p class="date-age"> {{user.date}}</p>
             </div>
         </div>
       </div>
@@ -38,6 +29,7 @@
 
 <script>
 import firebase from 'firebase/app'
+import moment from 'moment';
 
 export default {
   name: 'InformationPage',
@@ -47,21 +39,24 @@ export default {
         {
           key: 'today',
           highlight: true,
-          dates: new Date()
+          dates: new Date(),
         }
       ],
-      users: []
+      users: [],
     }
   },
   created() {
-    var db = firebase.firestore();
-    
+    let db = firebase.firestore();
+  
     db.collection("users").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           const data = {
             'name': doc.data().name,
-            'date': doc.data().date
+            'date': moment(doc.data().date).format('DD MMM YYYY'),
+            // 'age': moment(doc.data().date, "YYYYMMDD").fromNow().replace('years ago', 'y.o')
           }
+          
+
           this.users.push(data);
           console.log('users', this.users)
             // console.log(`${doc.id} => ${doc.data()}`);
