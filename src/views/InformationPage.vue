@@ -12,13 +12,13 @@
       <hr class="customShadow">
       <div class="dates-wrap">
         <h3 class="has-text-weight-semibold">This month birthdays:</h3>
-        <div class="dates-lp-wrap" v-for="user in users" :key="user.date" @click="goSingle(user.name)">
+        <div class="dates-lp-wrap" v-for="user in users" :key="user.date" @click="goSingle(user.id)">
             <div>
               <span class="has-text-weight-semibold">&#183;</span>
             </div>
             <div class="birthday-name">
               <h3> {{user.name}} </h3>
-              <p class="date-age"> {{user.date}}</p>
+              <p class="date-age"> {{user.date}} - turns {{user.age}} y.o.</p>
             </div>
         </div>
       </div>
@@ -44,35 +44,59 @@ export default {
         }
       ],
       users: [],
+      currentYear: '',
+      isFirstRun: false
     }
   },
   methods: {
-    goSingle(birthdayName) {
-     this.$router.push({ path: `single/${birthdayName}`});
+    goSingle(userID) {
+     this.$router.push({ name: 'SinglePage', params: { userID: userID }});
     },
     getTime(payload) {
-      console.log('cal', payload);
+      this.currentYear = payload.year;
+      // console.log('currentYear', this.currentYear);
+      // console.log('cal', payload);
+      if (this.isFirstRun === false) {
+        this.init()
+      }
+      this.isFirstRun = false;
+    },
+    init() {
+
+      let db = firebase.firestore();
+
+      this.users = [];
+    
+      db.collection("users").get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            // console.log('doc', doc);
+            var ms = Number(moment(doc.data().date, 'YYYY'));
+            var b = new Date(ms).getFullYear()
+            // console.log("b", b);  
+            var diff = this.currentYear - b;
+            // console.log("diff", diff);
+  
+            const data = {
+              'id': doc.id,
+              'name': doc.data().name,
+              'date': moment(doc.data().date).format('DD MMM YYYY'),
+              'age': diff
+              // 'age': moment(doc.data().date, "YYYYMMDD").fromNow().replace('years ago', 'y.o')
+            }
+              
+            this.users.push(data);
+          
+            // console.log('users', this.users)
+              // console.log(`${doc.id} => ${doc.data()}`);
+              // this.users = doc.data();
+          });
+      });
+      this.isFirstRun = true;
     }
   },
   created() {
-    let db = firebase.firestore();
-  
-    db.collection("users").get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          const data = {
-            'name': doc.data().name,
-            'date': moment(doc.data().date).format('DD MMM YYYY'),
-            // 'age': moment(doc.data().date, "YYYYMMDD").fromNow().replace('years ago', 'y.o')
-          }
-          
-
-          this.users.push(data);
-          console.log('users', this.users)
-            // console.log(`${doc.id} => ${doc.data()}`);
-            // this.users = doc.data();
-        });
-    });
-  },
+    this.init();
+  }
 }
 </script>
 

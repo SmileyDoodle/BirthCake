@@ -5,17 +5,47 @@
       </figure>
       <div class="info-wrap">
           <div class="details-wrap">
-            <h1><strong>Zuzana</strong></h1>
-            <h6>12 June 1991</h6>
-            <p>Lorem ipsum dolor sit amet, consecte adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <h1><strong> {{name}} </strong></h1>
+            <h6> {{date}} </h6>
+            <p> {{message}} </p>
           </div>
       </div>
   </div>
 </template>
 
 <script>
-export default {
+import firebase from 'firebase/app'
+import moment from 'moment';
 
+export default {
+    name: 'SinglePage',
+    data() {
+        return {
+            gotUserID: '',
+            name: '',
+            date: '',
+            message: ''
+        }
+    },
+    methods: {
+        fetchUser() {
+            let db = firebase.firestore();
+
+            db.collection("users").where(firebase.firestore.FieldPath.documentId(), '==', this.$route.params.userID)
+                .get().then(querySnapshot => {
+                    querySnapshot.forEach((doc) => {
+                        this.name = doc.data().name,
+                        this.date = moment(doc.data().date).format('DD MMM YYYY'),doc.data().date,
+                        this.message = doc.data().message
+                    })
+                })
+        }
+    },
+    mounted() {
+        this.gotUserID = this.$route.params.userID;
+        console.log('id', this.$route.params.userID);
+        this.fetchUser();
+    },
 }
 </script>
 

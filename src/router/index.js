@@ -37,7 +37,7 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/single/:name',
+    path: '/single/:userID',
     name: 'SinglePage',
     component: () => import('../views/SinglePage.vue'),
     meta: { requiresAuth: true }
