@@ -1,7 +1,8 @@
 <template>
   <div class="singlePage-wrap">
       <figure class="image is-128x128 figure">
-         <img class="is-rounded avatar-img" src="https://bulma.io/images/placeholders/128x128.png" />
+          <img class="is-rounded avatar-styling"  v-if="photo"  :src="photo" /> 
+         <img class="is-rounded avatar-img" v-if="!photo" src="https://bulma.io/images/placeholders/128x128.png" />
       </figure>
       <div class="info-wrap">
           <div class="details-wrap">
@@ -37,7 +38,8 @@ export default {
             gotUserID: '',
             name: '',
             date: '',
-            message: ''
+            message: '',
+            photo: ''
         }
     },
     methods: {
@@ -49,7 +51,8 @@ export default {
                     querySnapshot.forEach((doc) => {
                         this.name = doc.data().name,
                         this.date = moment(doc.data().date).format('DD MMM YYYY'),doc.data().date,
-                        this.message = doc.data().message
+                        this.message = doc.data().message,
+                        this.photo = doc.data().photo
                     })
                 })
         },
@@ -69,7 +72,7 @@ export default {
     },
     mounted() {
         this.gotUserID = this.$route.params.userID;
-        console.log('id', this.$route.params.userID);
+        // console.log('id', this.$route.params.userID);
         this.fetchUser();
     },
 }
@@ -96,7 +99,7 @@ export default {
 .details-wrap p {
     text-align: left;
     margin-top: 1rem;
-    height: 215px;
+    height: 205px;
     overflow-x: auto;
 }
 .btn-wrap {

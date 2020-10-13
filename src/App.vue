@@ -58,4 +58,7 @@ a {
     width: 100%;
     margin: 0.2rem 0;
 }
+.avatar-styling {
+    object-fit: cover;
+}
 </style>

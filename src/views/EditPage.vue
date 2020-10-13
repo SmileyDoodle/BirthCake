@@ -72,7 +72,9 @@ export default {
             name: '',
             date: '',
             message: '',
+            photo: '',
             url: '',
+            file: ''
         }
     },
     methods: {
@@ -81,20 +83,31 @@ export default {
         },
         previewFiles(event) {
           console.log(event.target.files);
-          const file = event.target.files[0];
-          this.url = URL.createObjectURL(file);
+          this.file = event.target.files[0];
+          this.url = URL.createObjectURL(this.file);
+
+        //   this.uploadPhoto(file)
         },
-        saveUser() {
+        async saveUser() {
             let db = firebase.firestore();
+
+            const uploadedRef = await this.uploadPhoto(this.file)
 
             db.collection("users").add({
                 name: this.name,
                 date: this.date,
-                message: this.message
+                message: this.message,
+                photo: await uploadedRef.getDownloadURL()
             })
             // eslint-disable-next-line no-unused-vars
             .then(docRef => this.$router.push('/information'))
             .catch (error => console.log(error))                
+        },
+        async uploadPhoto(file) {
+            let storageRef = firebase.storage().ref();
+            let ref = storageRef.child('avatar/' + file.name);
+            await ref.put(file)
+            return ref;
         }
     }
 }
@@ -111,9 +124,6 @@ export default {
     display: flex;
     justify-content: center;
     margin: 0 auto;
-}
-.avatar-styling {
-    object-fit: cover;
 }
 .edit-lp-wrap {
     margin-top: 2rem;
