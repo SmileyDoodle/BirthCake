@@ -10,6 +10,14 @@
             <p> {{message}} </p>
           </div>
       </div>
+      <div class="btn-wrap">
+          <button
+                class="button btn-delete"
+                type="delete"
+                @click="deleteUser()"
+          > Delete 
+          </button>
+      </div>
   </div>
 </template>
 
@@ -39,6 +47,19 @@ export default {
                         this.message = doc.data().message
                     })
                 })
+        },
+        deleteUser() {
+            if(confirm('Are you sure?')) {
+                let db = firebase.firestore();
+
+                db.collection("users").where(firebase.firestore.FieldPath.documentId(), '==', this.$route.params.userID)
+                .get().then(querySnapshot => {
+                    querySnapshot.forEach((doc) => {
+                        doc.ref.delete();
+                        this.$router.push('/information');
+                    })
+                })
+            }
         }
     },
     mounted() {
@@ -69,6 +90,14 @@ export default {
 }
 .details-wrap p {
     text-align: left;
+    margin-top: 1rem;
+}
+.btn-wrap {
+    display: flex;
+    width: 70%;
+}
+.btn-delete {
+    background-color: #dcc9cd;
     margin-top: 1rem;
 }
 </style>

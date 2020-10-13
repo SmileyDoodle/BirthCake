@@ -50,8 +50,8 @@ const routes = [
   },
   {
     path: '/about',
-    name: 'About',
-    component: () => import('../views/About.vue'),
+    name: 'AboutPage',
+    component: () => import('../views/AboutPage.vue'),
     meta: { requiresAuth: true }
   },
 ]

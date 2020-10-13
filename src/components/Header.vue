@@ -35,7 +35,7 @@
           v-show="$route.path==='/' || $route.path==='/signup' || $route.path==='/login' ? false : true"  
         >
           <div class="navbar-end">
-            <a class="navbar-item">
+            <a class="navbar-item" @click="redirect()">
               About
             </a>
             <a class="navbar-item" @click="logout()">
@@ -60,6 +60,10 @@ export default {
       }
     },
     methods: {
+      redirect() {
+        this.$router.push('/about')
+        this.showNav = !this.showNav
+      },
       logout() {
         firebase.auth().signOut().then(() => {
           // Sign-out successful.
