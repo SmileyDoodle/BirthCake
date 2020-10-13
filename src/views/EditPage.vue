@@ -6,7 +6,7 @@
                 ref="fileUpload" accept="image/png, image/jpeg"
                 @change="previewFiles">
             <img class="is-rounded avatar-img" src="https://bulma.io/images/placeholders/128x128.png" v-if="!url" />
-            <img class="is-rounded" :src="url" v-if="url" />
+            <img class="is-rounded avatar-styling" :src="url" v-if="url" />
         </figure>
         <div class="edit-lp-wrap">
             <p>
@@ -111,6 +111,9 @@ export default {
     display: flex;
     justify-content: center;
     margin: 0 auto;
+}
+.avatar-styling {
+    object-fit: cover;
 }
 .edit-lp-wrap {
     margin-top: 2rem;

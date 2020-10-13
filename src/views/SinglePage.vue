@@ -12,6 +12,11 @@
       </div>
       <div class="btn-wrap">
           <button
+                class="button btn-edit"
+                type="edit"
+          > Edit 
+          </button>
+          <button
                 class="button btn-delete"
                 type="delete"
                 @click="deleteUser()"
@@ -91,13 +96,22 @@ export default {
 .details-wrap p {
     text-align: left;
     margin-top: 1rem;
+    height: 215px;
+    overflow-x: auto;
 }
 .btn-wrap {
     display: flex;
     width: 70%;
+    justify-content: flex-end;
 }
 .btn-delete {
     background-color: #dcc9cd;
     margin-top: 1rem;
+}
+.btn-edit {
+    margin-top: 1rem;
+    margin-right: 0.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 </style>
