@@ -43,7 +43,13 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
-    path: '/edit',
+    path: '/add',
+    name: 'AddPage',
+    component: () => import('../views/AddPage.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/edit/:userID',
     name: 'EditPage',
     component: () => import('../views/EditPage.vue'),
     meta: { requiresAuth: true }

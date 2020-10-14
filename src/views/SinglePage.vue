@@ -1,7 +1,7 @@
 <template>
   <div class="singlePage-wrap">
       <figure class="image is-128x128 figure">
-          <img class="is-rounded avatar-styling"  v-if="photo"  :src="photo" /> 
+         <img class="is-rounded avatar-styling"  v-if="photo"  :src="photo" /> 
          <img class="is-rounded avatar-img" v-if="!photo" src="https://bulma.io/images/placeholders/128x128.png" />
       </figure>
       <div class="info-wrap">
@@ -15,6 +15,7 @@
           <button
                 class="button btn-edit"
                 type="edit"
+                @click="editUser(gotUserID)"
           > Edit 
           </button>
           <button
@@ -56,6 +57,9 @@ export default {
                     })
                 })
         },
+        editUser(gotUserID) {
+            this.$router.push({ name: 'EditPage', params: { userID: gotUserID }});
+        },
         deleteUser() {
             if(confirm('Are you sure?')) {
                 let db = firebase.firestore();
@@ -68,7 +72,7 @@ export default {
                     })
                 })
             }
-        }
+        },
     },
     mounted() {
         this.gotUserID = this.$route.params.userID;
@@ -87,6 +91,7 @@ export default {
 }
 .info-wrap {
     display: flex;
+    width: 100%;
     justify-content: center;
     margin-top: 2rem;
 }

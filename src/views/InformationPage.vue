@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="sticked-button">
-        <router-link to="/edit" tag="button" class="button is-rounded">+</router-link>
+        <router-link to="/add" tag="button" class="button is-rounded">+</router-link>
       </div>
   </div>
 </template>

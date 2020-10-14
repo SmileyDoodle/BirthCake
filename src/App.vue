@@ -60,5 +60,6 @@ a {
 }
 .avatar-styling {
     object-fit: cover;
+    height: 128px !important;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="edit-wrap">
+  <div class="add-wrap">
       <div>
         <figure class="image is-128x128 figure" @click="upload()">
             <input type="file" name="thumbnail" id="thubnail" style="display: none" 
@@ -8,7 +8,7 @@
             <img class="is-rounded avatar-img" src="https://bulma.io/images/placeholders/128x128.png" v-if="!url" />
             <img class="is-rounded avatar-styling" :src="url" v-if="url" />
         </figure>
-        <div class="edit-lp-wrap">
+        <div class="add-lp-wrap">
             <p>
                 <label for="name">Name</label>
                 <input
@@ -25,7 +25,6 @@
             <p>
                 <label for="age">Date of birth</label>
                 <input
-                disabled
                 class="input"
                 id="age"
                 v-model="date"
@@ -55,21 +54,21 @@
         <button
             class="button btn-submit"
             type="submit"
-            @click="updateUser()"
-        > Save 
+            @click="saveUser()"
+        > Submit 
         </button>
       </div>
   </div>
 </template>
 
 <script>
-import firebase from 'firebase/app'
+import firebase from 'firebase/app' 
 
 export default {
     name: 'AddPage',
     data() {
         return {
-            recievedUserID: '',
+            error: '',
             name: '',
             date: '',
             message: '',
@@ -81,27 +80,8 @@ export default {
         }
     },
     methods: {
-        fetchUser() {
-            let db = firebase.firestore();
-
-            db.collection("users").where(firebase.firestore.FieldPath.documentId(), '==', this.$route.params.userID)
-                .get().then(querySnapshot => {
-                    querySnapshot.forEach((doc) => {
-                        this.name = doc.data().name,
-                        this.date = doc.data().date,
-                        this.message = doc.data().message,
-                        this.url = doc.data().photo,
-                        this.photoName = doc.data().photoName // old photo
-                    })
-                })
-        },
         upload() {
             this.$refs.fileUpload.click();        
-        },
-        deleteFile() {
-            let storageRef = firebase.storage().ref();
-            let desertRef = storageRef.child('avatar/' + this.photoName);
-            desertRef.delete()
         },
         previewFiles(event) {
           console.log(event.target.files);
@@ -110,35 +90,25 @@ export default {
 
         //   this.uploadPhoto(file)
         },
-        async updateUser() {
+        async saveUser() {
             let db = firebase.firestore();
 
-            if (this.file) {
-                const uploadedRef = await this.uploadPhoto(this.file);
-                this.currentPhoto = await uploadedRef.getDownloadURL();
-                this.deleteFile();
-                this.photoName = this.file.name // new photo
 
-            } else {
-                this.currentPhoto = this.url;
+            if (this.file) {
+                const uploadedRef = await this.uploadPhoto(this.file)
+                this.currentPhoto = await uploadedRef.getDownloadURL()
+                this.photoName = this.file.name
             }
 
-            db.collection("users").where(firebase.firestore.FieldPath.documentId(), '==', this.$route.params.userID)
-                .get().then(querySnapshot => {
-                    querySnapshot.forEach( async (doc) => {
-                        doc.ref.update ({
-                            name: this.name,
-                            date: this.date,
-                            message: this.message,
-                            photo: this.currentPhoto,
-                            photoName: this.photoName
-                        })
-                    })
-                })
-            // eslint-disable-next-line no-unused-vars
-            .then(() => {
-                this.$router.push({name: 'SinglePage', params: { userID: this.recievedUserID }})
+            db.collection("users").add({
+                name: this.name,
+                date: this.date,
+                message: this.message,
+                photo: this.currentPhoto,
+                photoName: this.photoName
             })
+            // eslint-disable-next-line no-unused-vars
+            .then(docRef => this.$router.push('/information'))
             .catch (error => console.log(error))                
         },
         async uploadPhoto(file) {
@@ -147,17 +117,12 @@ export default {
             await ref.put(file)
             return ref;
         }
-    },
-    mounted() {
-        this.recievedUserID = this.$route.params.userID;
-        // console.log('userID', this.$route.params.userID);
-        this.fetchUser();
-    },
+    }
 }
 </script>
 
 <style>
-.edit-wrap {
+.add-wrap {
     display: flex;
     justify-content: center;
     margin-top: 2rem;
@@ -168,10 +133,10 @@ export default {
     justify-content: center;
     margin: 0 auto;
 }
-.edit-lp-wrap {
+.add-lp-wrap {
     margin-top: 2rem;
 }
-.edit-lp-wrap p {
+.add-lp-wrap p {
     margin: 1rem 0;
 }
 .btn-submit {

@@ -90,4 +90,9 @@ export default {
   align-items: center;
   margin-left: 1rem;
 }
+.navbar-menu {
+  position: absolute;
+  width: 100%;
+  opacity: 0.95;
+}
 </style>
