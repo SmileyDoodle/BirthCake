@@ -42,7 +42,8 @@ export default {
             shortDate: '',
             checked: false,
             message: '',
-            photo: ''
+            photo: '',
+            photoName: '',
         }
     },
     methods: {
@@ -57,15 +58,24 @@ export default {
                         this.date = moment(doc.data().date).format('DD MMM YYYY'),
                         this.shortDate = moment(doc.data().date).format('DD MMM'),
                         this.message = doc.data().message,
-                        this.photo = doc.data().photo
+                        this.photo = doc.data().photo,
+                        this.photoName = doc.data().photoName
                     })
                 })
         },
         editUser(gotUserID) {
             this.$router.push({ name: 'EditPage', params: { userID: gotUserID }});
         },
+        deleteFile() {
+            let storageRef = firebase.storage().ref();
+            let desertRef = storageRef.child('avatar/' + this.photoName);
+            desertRef.delete()
+        },
         deleteUser() {
             if(confirm('Are you sure?')) {
+                
+                this.deleteFile();
+
                 let db = firebase.firestore();
 
                 db.collection("users").where(firebase.firestore.FieldPath.documentId(), '==', this.$route.params.userID)

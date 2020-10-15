@@ -105,9 +105,10 @@ export default {
 
 
             if (this.file) {
-                const uploadedRef = await this.uploadPhoto(this.file)
+                const timestamp = new Date().getTime();
+                const uploadedRef = await this.uploadPhoto(this.file, timestamp)
                 this.currentPhoto = await uploadedRef.getDownloadURL()
-                this.photoName = this.file.name
+                this.photoName =  timestamp + this.file.name
             }
 
             db.collection("users").add({
@@ -122,9 +123,9 @@ export default {
             .then(docRef => this.$router.push('/information'))
             .catch (error => console.log(error))                
         },
-        async uploadPhoto(file) {
+        async uploadPhoto(file, timestamp) {
             let storageRef = firebase.storage().ref();
-            let ref = storageRef.child('avatar/' + file.name);
+            let ref = storageRef.child('avatar/' + timestamp + file.name);
             await ref.put(file)
             return ref;
         }
