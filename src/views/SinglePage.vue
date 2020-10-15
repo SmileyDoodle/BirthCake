@@ -7,7 +7,7 @@
       <div class="info-wrap">
           <div class="details-wrap">
             <h1><strong> {{name}} </strong></h1>
-            <h6> {{date}} </h6>
+            <h6> {{checked === false ? date : shortDate}} </h6>
             <p> {{message}} </p>
           </div>
       </div>
@@ -39,6 +39,8 @@ export default {
             gotUserID: '',
             name: '',
             date: '',
+            shortDate: '',
+            checked: false,
             message: '',
             photo: ''
         }
@@ -51,7 +53,9 @@ export default {
                 .get().then(querySnapshot => {
                     querySnapshot.forEach((doc) => {
                         this.name = doc.data().name,
-                        this.date = moment(doc.data().date).format('DD MMM YYYY'),doc.data().date,
+                        this.checked = doc.data().checkboxYear,
+                        this.date = moment(doc.data().date).format('DD MMM YYYY'),
+                        this.shortDate = moment(doc.data().date).format('DD MMM'),
                         this.message = doc.data().message,
                         this.photo = doc.data().photo
                     })

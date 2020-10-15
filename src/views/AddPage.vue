@@ -36,7 +36,16 @@
                 required
                 >
             </p>
-                <p>
+            <label class="checkbox">
+                <input 
+                type="checkbox" 
+                class="checkbox-styling"
+                id="checkbox" 
+                v-model="checked"
+                >
+                Don't know the year (pick any)
+            </label>
+            <p>
                 <label for="age">Message</label>
                 <textarea 
                     class="textarea"
@@ -71,6 +80,7 @@ export default {
             error: '',
             name: '',
             date: '',
+            checked: false,
             message: '',
             photo: '',
             url: '',
@@ -103,6 +113,7 @@ export default {
             db.collection("users").add({
                 name: this.name,
                 date: this.date,
+                checkboxYear: this.checked,
                 message: this.message,
                 photo: this.currentPhoto,
                 photoName: this.photoName
@@ -132,6 +143,13 @@ export default {
     display: flex;
     justify-content: center;
     margin: 0 auto;
+}
+.checkbox-styling {
+    height: 10px;
+}
+.checkbox {
+    font-size: 0.7rem;
+    opacity: 0.7;
 }
 .add-lp-wrap {
     margin-top: 2rem;

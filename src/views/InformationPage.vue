@@ -18,7 +18,10 @@
             </div>
             <div class="birthday-name">
               <h3> {{user.name}} </h3>
-              <p class="date-age"> {{user.date}} - turns {{user.age}} y.o.</p>
+              <p class="date-age"> 
+                {{user.checked === false ? user.date : user.shortDate}} 
+                {{user.checked === false ? "- turns " + user.age + " y.o." : " " }}
+              </p>
             </div>
         </div>
       </div>
@@ -72,23 +75,18 @@ export default {
             // console.log('doc', doc);
             var ms = Number(moment(doc.data().date, 'YYYY'));
             var b = new Date(ms).getFullYear()
-            // console.log("b", b);  
             var diff = this.currentYear - b;
-            // console.log("diff", diff);
   
             const data = {
               'id': doc.id,
               'name': doc.data().name,
               'date': moment(doc.data().date).format('DD MMM YYYY'),
+              'shortDate': moment(doc.data().date).format('DD MMM'),
+              'checked': doc.data().checkboxYear,
               'age': diff
               // 'age': moment(doc.data().date, "YYYYMMDD").fromNow().replace('years ago', 'y.o')
-            }
-              
+            }     
             this.users.push(data);
-          
-            // console.log('users', this.users)
-              // console.log(`${doc.id} => ${doc.data()}`);
-              // this.users = doc.data();
           });
       });
       this.isFirstRun = true;

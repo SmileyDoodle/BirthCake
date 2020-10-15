@@ -37,7 +37,7 @@
                 required
                 >
             </p>
-                <p>
+            <p>
                 <label for="age">Message</label>
                 <textarea 
                     class="textarea"
