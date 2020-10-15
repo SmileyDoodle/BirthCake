@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import firebase from 'firebase/app'
+import firebase from 'firebase/app';
 import moment from 'moment';
 
 export default {
@@ -48,6 +48,7 @@ export default {
       ],
       users: [],
       currentYear: '',
+      currentMonth: '',
       isFirstRun: false
     }
   },
@@ -57,6 +58,7 @@ export default {
     },
     getTime(payload) {
       this.currentYear = payload.year;
+      this.currentMonth = payload.month;
       // console.log('currentYear', this.currentYear);
       // console.log('cal', payload);
       if (this.isFirstRun === false) {
@@ -83,10 +85,15 @@ export default {
               'date': moment(doc.data().date).format('DD MMM YYYY'),
               'shortDate': moment(doc.data().date).format('DD MMM'),
               'checked': doc.data().checkboxYear,
-              'age': diff
+              'age': diff,
+              'month': 1 + moment(doc.data().date, 'YYYY/MM/DD').month()
               // 'age': moment(doc.data().date, "YYYYMMDD").fromNow().replace('years ago', 'y.o')
-            }     
-            this.users.push(data);
+            }
+            if (this.currentMonth === data.month) {
+              if (this.users.includes(data) === false) {
+                    this.users.push(data);
+              }
+            }      
           });
       });
       this.isFirstRun = true;
