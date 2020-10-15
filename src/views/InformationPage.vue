@@ -12,17 +12,19 @@
       <hr class="customShadow">
       <div class="dates-wrap">
         <h3 class="has-text-weight-semibold">This month birthdays:</h3>
-        <div class="dates-lp-wrap" v-for="user in users" :key="user.date" @click="goSingle(user.id)">
-            <div>
-              <span class="has-text-weight-semibold">&#183;</span>
-            </div>
-            <div class="birthday-name">
-              <h3> {{user.name}} </h3>
-              <p class="date-age"> 
-                {{user.checked === false ? user.date : user.shortDate}} 
-                {{user.checked === false ? "- turns " + user.age + " y.o." : " " }}
-              </p>
-            </div>
+        <div v-for="user in users" :key="user.id">
+          <div class="dates-lp-wrap" v-if="currentMonth === user.month"  @click="goSingle(user.id)">
+              <div>
+                <span class="has-text-weight-semibold">&#183;</span>
+              </div>
+              <div class="birthday-name">
+                <h3> {{user.name}} </h3>
+                <p class="date-age"> 
+                  {{user.checked === false ? user.date : user.shortDate}} 
+                  {{user.checked === false ? "- turns " + user.age + " y.o." : " " }}
+                </p>
+              </div>
+          </div>
         </div>
       </div>
       <div class="sticked-button">
@@ -61,10 +63,6 @@ export default {
       this.currentMonth = payload.month;
       // console.log('currentYear', this.currentYear);
       // console.log('cal', payload);
-      if (this.isFirstRun === false) {
-        this.init()
-      }
-      this.isFirstRun = false;
     },
     init() {
 
@@ -89,18 +87,14 @@ export default {
               'month': 1 + moment(doc.data().date, 'YYYY/MM/DD').month()
               // 'age': moment(doc.data().date, "YYYYMMDD").fromNow().replace('years ago', 'y.o')
             }
-            if (this.currentMonth === data.month) {
-              if (this.users.includes(data) === false) {
-                    this.users.push(data);
-              }
-            }      
+            this.users.push(data);
+             
           });
       });
-      this.isFirstRun = true;
     }
   },
   created() {
-    this.init();
+    this.init()
   }
 }
 </script>
