@@ -70,7 +70,7 @@ export default {
 
       this.users = [];
     
-      db.collection("users").get().then((querySnapshot) => {
+      db.collection("users").orderBy('birthdayDay').get().then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             // console.log('doc', doc);
             var ms = Number(moment(doc.data().date, 'YYYY'));
@@ -84,11 +84,12 @@ export default {
               'shortDate': moment(doc.data().date).format('DD MMM'),
               'checked': doc.data().checkboxYear,
               'age': diff,
-              'month': 1 + moment(doc.data().date, 'YYYY/MM/DD').month()
+              'month': 1 + moment(doc.data().date, 'YYYY/MM/DD').month(),
+              'birthdayDay': doc.data().birthdayDay
               // 'age': moment(doc.data().date, "YYYYMMDD").fromNow().replace('years ago', 'y.o')
             }
             this.users.push(data);
-             
+            // console.log(this.users);
           });
       });
     }

@@ -72,6 +72,8 @@
 
 <script>
 import firebase from 'firebase/app';
+import moment from 'moment';
+
 
 export default {
     name: 'AddPage',
@@ -80,6 +82,7 @@ export default {
             error: '',
             name: '',
             date: '',
+            'birthdayDay': '',
             checked: false,
             message: '',
             photo: '',
@@ -114,6 +117,7 @@ export default {
             db.collection("users").add({
                 name: this.name,
                 date: this.date,
+                birthdayDay: moment(this.date, 'YYYY/MM/DD').date(),
                 checkboxYear: this.checked,
                 message: this.message,
                 photo: this.currentPhoto,
