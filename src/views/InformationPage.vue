@@ -49,6 +49,7 @@ export default {
         }
       ],
       users: [],
+      currentDates: [],
       currentYear: '',
       currentMonth: '',
       isFirstRun: false
@@ -85,12 +86,20 @@ export default {
               'checked': doc.data().checkboxYear,
               'age': diff,
               'month': 1 + moment(doc.data().date, 'YYYY/MM/DD').month(),
+              'monthForDots': moment(doc.data().date, 'YYYY/MM/DD').month(),
+              'yearForDots': moment().year(),
               'birthdayDay': doc.data().birthdayDay
               // 'age': moment(doc.data().date, "YYYYMMDD").fromNow().replace('years ago', 'y.o')
             }
+            this.currentDates.push(new Date(data.yearForDots, data.monthForDots, data.birthdayDay));
             this.users.push(data);
             // console.log(this.users);
           });
+          const dot = {
+            dot: 'red',
+            dates: this.currentDates
+          }
+          this.currentDate.push(dot)
       });
     }
   },
