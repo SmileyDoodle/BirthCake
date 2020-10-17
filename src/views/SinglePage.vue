@@ -77,16 +77,20 @@ export default {
         deleteUser() {
             if(confirm('Are you sure?')) {
                 
-                this.deleteFile();
+                if(this.photoName) {
+                    this.deleteFile();
+                }
 
                 let db = firebase.firestore();
 
-                db.collection("users").where(firebase.firestore.FieldPath.documentId(), '==', this.$route.params.userID)
-                .get().then(querySnapshot => {
-                    querySnapshot.forEach((doc) => {
-                        doc.ref.delete();
-                        this.$router.push('/information');
-                    })
+                const uid = firebase.auth().currentUser.uid;
+                db.collection("users").doc(uid).collection("birthdays").
+                    where(firebase.firestore.FieldPath.documentId(), '==', this.$route.params.userID)
+                    .get().then(querySnapshot => {
+                        querySnapshot.forEach((doc) => {
+                            doc.ref.delete();
+                            this.$router.push('/information');
+                        })
                 })
             }
         },

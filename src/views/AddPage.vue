@@ -10,7 +10,7 @@
         </figure>
         <div class="add-lp-wrap">
             <p>
-                <label for="name">Name</label>
+                <label for="name">Name*</label>
                 <input
                 class="input"
                 id="name"
@@ -19,11 +19,10 @@
                 name="name"
                 placeholder="John Doe"
                 autocomplete="off"
-                required
                 >
             </p>
             <p>
-                <label for="age">Date of birth</label>
+                <label for="age">Date of birth*</label>
                 <input
                 class="input"
                 id="age"
@@ -33,7 +32,6 @@
                 min="0"
                 placeholder="dd.mm.yyyy"
                 autocomplete="off"
-                required
                 >
             </p>
             <label class="checkbox">
@@ -63,6 +61,7 @@
         <button
             class="button btn-submit"
             type="submit"
+            :disabled="!name || !date"
             @click="saveUser()"
         > Submit 
         </button>
