@@ -71,7 +71,8 @@ export default {
 
       this.users = [];
     
-      db.collection("users").orderBy('birthdayDay').get().then((querySnapshot) => {
+      const uid = firebase.auth().currentUser.uid;
+      db.collection("users").doc(uid).collection("birthdays").orderBy('birthdayDay').get().then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             // console.log('doc', doc);
             var ms = Number(moment(doc.data().date, 'YYYY'));

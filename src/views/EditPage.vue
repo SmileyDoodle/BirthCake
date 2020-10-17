@@ -77,14 +77,16 @@ export default {
             url: '',
             file: '',
             photoName: '',
-            currentPhoto: ''
+            currentPhoto: '',
+            uid: ''
         }
     },
     methods: {
         fetchUser() {
             let db = firebase.firestore();
 
-            db.collection("users").where(firebase.firestore.FieldPath.documentId(), '==', this.$route.params.userID)
+            db.collection("users").doc(this.uid).collection("birthdays")
+                .where(firebase.firestore.FieldPath.documentId(), '==', this.$route.params.userID)
                 .get().then(querySnapshot => {
                     querySnapshot.forEach((doc) => {
                         this.name = doc.data().name,
@@ -100,7 +102,7 @@ export default {
         },
         deleteFile() {
             let storageRef = firebase.storage().ref();
-            let desertRef = storageRef.child('avatar/' + this.photoName);
+            let desertRef = storageRef.child('avatar/' + this.uid +'/' + this.photoName);
             desertRef.delete()
         },
         previewFiles(event) {
@@ -124,7 +126,8 @@ export default {
                 this.currentPhoto = this.url;
             }
 
-            db.collection("users").where(firebase.firestore.FieldPath.documentId(), '==', this.$route.params.userID)
+            db.collection("users").doc(this.uid).collection("birthdays")
+                .where(firebase.firestore.FieldPath.documentId(), '==', this.$route.params.userID)
                 .get().then(querySnapshot => {
                     querySnapshot.forEach( async (doc) => {
                         doc.ref.update ({
@@ -144,13 +147,14 @@ export default {
         },
         async uploadPhoto(file, timestamp) {
             let storageRef = firebase.storage().ref();
-            let ref = storageRef.child('avatar/' + timestamp + file.name);
+            let ref = storageRef.child('avatar/'  + this.uid + '/' + timestamp + file.name);
             await ref.put(file)
             return ref;
         }
     },
     mounted() {
         this.recievedUserID = this.$route.params.userID;
+        this.uid = firebase.auth().currentUser.uid;
         // console.log('userID', this.$route.params.userID);
         this.fetchUser();
     },

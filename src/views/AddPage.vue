@@ -113,8 +113,9 @@ export default {
                 this.currentPhoto = await uploadedRef.getDownloadURL()
                 this.photoName =  timestamp + this.file.name
             }
-
-            db.collection("users").add({
+            
+            const uid = firebase.auth().currentUser.uid;
+            db.collection("users").doc(uid).collection("birthdays").add({
                 name: this.name,
                 date: this.date,
                 birthdayDay: moment(this.date, 'YYYY/MM/DD').date(),
@@ -129,7 +130,8 @@ export default {
         },
         async uploadPhoto(file, timestamp) {
             let storageRef = firebase.storage().ref();
-            let ref = storageRef.child('avatar/' + timestamp + file.name);
+            const uid = firebase.auth().currentUser.uid;
+            let ref = storageRef.child('avatar/' + uid + '/' + timestamp + file.name);
             await ref.put(file)
             return ref;
         }

@@ -50,7 +50,9 @@ export default {
         fetchUser() {
             let db = firebase.firestore();
 
-            db.collection("users").where(firebase.firestore.FieldPath.documentId(), '==', this.$route.params.userID)
+            const uid = firebase.auth().currentUser.uid;
+            db.collection("users").doc(uid).collection("birthdays")
+                .where(firebase.firestore.FieldPath.documentId(), '==', this.$route.params.userID)
                 .get().then(querySnapshot => {
                     querySnapshot.forEach((doc) => {
                         this.name = doc.data().name,
@@ -68,7 +70,8 @@ export default {
         },
         deleteFile() {
             let storageRef = firebase.storage().ref();
-            let desertRef = storageRef.child('avatar/' + this.photoName);
+            const uid = firebase.auth().currentUser.uid;
+            let desertRef = storageRef.child('avatar/' + uid + '/' + this.photoName);
             desertRef.delete()
         },
         deleteUser() {
