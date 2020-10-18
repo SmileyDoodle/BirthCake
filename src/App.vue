@@ -32,9 +32,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   display: grid;
-  height: 100vh;
+  min-height: 93vh;
   grid-template-rows: auto 1fr auto;
 }
+
 
 a {
   color: #2c3e50;
@@ -59,7 +60,22 @@ a {
     margin: 0.2rem 0;
 }
 .avatar-styling {
-    object-fit: cover;
+    object-fit: cover !important;
     height: 128px !important;
+    /* position: absolute; */
 }
+.figure {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    background-size: cover;
+    background-position: center;
+    background-clip: content-box;
+    border-radius: 50%;
+}
+/* .avatar-styling {
+    object-fit: cover !important;
+    height: 128px !important;
+    position: absolute;
+} */
 </style>

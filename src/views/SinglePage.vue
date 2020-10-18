@@ -1,8 +1,7 @@
 <template>
   <div class="singlePage-wrap">
-      <figure class="image is-128x128 figure">
-         <img class="is-rounded avatar-styling"  v-if="photo"  :src="photo" /> 
-         <img class="is-rounded avatar-img" v-if="!photo" src="https://bulma.io/images/placeholders/128x128.png" />
+      <figure class="image is-128x128 figure" 
+            :style="{'background-image': 'url(' + (photo ? photo : 'https://bulma.io/images/placeholders/128x128.png') + ')'}">
       </figure>
       <div class="info-wrap">
           <div class="details-wrap">

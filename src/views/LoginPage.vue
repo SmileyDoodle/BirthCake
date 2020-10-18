@@ -2,22 +2,22 @@
   <div class="login columns is-mobile is-centered">
     <div  class="column is-two-thirds">
       <div class="inputs-button-wrap">
-        <form autocomplete="off">
+        <form autocomplete="off" class="login-form">
           <input
-            class="button column"
+            class="button column login-input"
             name="email"
             type="email"
             placeholder="Email"
             v-model="email"
           />
           <input
-            class="button column"
+            class="button column login-input"
             name="password"
             type="password"
             placeholder="Password"
             v-model="password"
           />
-          <button class="button" @click="login" type="button">Login</button>
+          <button class="button btn-colour" @click="login" type="button">Login</button>
           <button class="button is-facebook social-button" @click="signinFacebook" type="button">
             <span class="icon">
               <i class="fab fa-facebook"></i>
@@ -123,11 +123,24 @@ export default {
 </script>
 
 <style>
+.login-form {
+  width: 85%;
+}
+.login-input {
+  width: 100%;
+}
+.btn-colour {
+    background-color: #3a5184;
+    color: #fff;
+}
 .is-facebook {
   margin-top: 1rem !important;
 }
 .is-google {
   color: #fff;
   background-color: #4285F4;
+}
+.account {
+  color: #3a5184;
 }
 </style>
