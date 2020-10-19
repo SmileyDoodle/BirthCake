@@ -2,7 +2,7 @@
   <div class="edit-wrap">
       <div>
         <figure class="image is-128x128 figure" @click="upload()" 
-            :style="{'background-image': 'url(' + (url ? url : 'https://bulma.io/images/placeholders/128x128.png') + ')'}">
+            :style="{'background-image': 'url(' + (url ? url : src=require('../assets/images/photo.png')) + ')'}">
             <input type="file" name="thumbnail" id="thubnail" style="display: none" 
                 ref="fileUpload" accept="image/png, image/jpeg"
                 @change="previewFiles">
@@ -179,6 +179,7 @@ export default {
     margin: 1rem 0;
 }
 .btn-submit {
-    background-color: #dcc9cd;
+    background-color: #3a5184;
+    color: #fff;
 }
 </style>

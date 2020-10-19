@@ -44,7 +44,11 @@ export default {
       currentDate: [
         {
           key: 'today',
-          highlight: true,
+          highlight: {
+            backgroundColor: '#edcebe',
+            fillMode: 'solid',
+            class: 'customHighlight'
+          },
           dates: new Date(),
         }
       ],
@@ -97,7 +101,11 @@ export default {
             // console.log(this.users);
           });
           const dot = {
-            dot: 'red',
+            dot: {
+              backgroundColor: '#3a5184',
+              fillMode: 'solid',
+              class: 'customDot'
+            },
             dates: this.currentDates
           }
           this.currentDate.push(dot)
@@ -153,6 +161,13 @@ export default {
 }
 .sticked-button button {
   padding: 7px 14px !important;
-  background-color: #dcc9cd;
+  background-color: #3a5184;
+  color: #fff;
+}
+.customHighlight {
+  background-color: #edcebe;
+}
+.customDot {
+  background-color: #3a5184;
 }
 </style>

@@ -2,7 +2,7 @@
   <div class="add-wrap">
       <div>
         <figure class="image is-128x128 figure" @click="upload()" 
-            :style="{'background-image': 'url(' + (url ? url : 'https://bulma.io/images/placeholders/128x128.png') + ')'}">
+            :style="{'background-image': 'url(' + (url ? url : src=require('../assets/images/photo.png')) + ')'}">
             <input type="file" name="thumbnail" id="thubnail" style="display: none" 
                 ref="fileUpload" accept="image/png, image/jpeg"
                 @change="previewFiles">
@@ -59,6 +59,7 @@
         </div>
         <button
             class="button btn-submit"
+            :class="{'is-loading': isLoading}"
             type="submit"
             :disabled="!name || !date"
             @click="saveUser()"
@@ -87,7 +88,8 @@ export default {
             url: '',
             file: '',
             photoName: '',
-            currentPhoto: ''
+            currentPhoto: '',
+            isLoading: false
         }
     },
     methods: {
@@ -102,6 +104,8 @@ export default {
         //   this.uploadPhoto(file)
         },
         async saveUser() {
+            this.isLoading = true;
+
             let db = firebase.firestore();
 
 
@@ -158,6 +162,7 @@ export default {
     margin: 1rem 0;
 }
 .btn-submit {
-    background-color: #dcc9cd;
+    background-color: #3a5184;
+    color: #fff;
 }
 </style>

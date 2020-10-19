@@ -1,7 +1,7 @@
 <template>
   <div class="singlePage-wrap">
       <figure class="image is-128x128 figure" 
-            :style="{'background-image': 'url(' + (photo ? photo : 'https://bulma.io/images/placeholders/128x128.png') + ')'}">
+            :style="{'background-image': 'url(' + (photo ? photo : src=require('../assets/images/photo.png')) + ')'}">
       </figure>
       <div class="info-wrap">
           <div class="details-wrap">
@@ -12,7 +12,7 @@
       </div>
       <div class="btn-wrap">
           <button
-                class="button btn-edit"
+                class="button btn-edit btn-light-colour"
                 type="edit"
                 @click="editUser(gotUserID)"
           > Edit 
@@ -87,8 +87,9 @@ export default {
                     where(firebase.firestore.FieldPath.documentId(), '==', this.$route.params.userID)
                     .get().then(querySnapshot => {
                         querySnapshot.forEach((doc) => {
-                            doc.ref.delete();
-                            this.$router.push('/information');
+                            doc.ref.delete().then(()=>{
+                                this.$router.push('/information');
+                            });
                         })
                 })
             }
@@ -132,8 +133,12 @@ export default {
     width: 70%;
     justify-content: flex-end;
 }
+.btn-light-colour {
+   background-color: #f2eee8; 
+}
 .btn-delete {
-    background-color: #dcc9cd;
+    background-color: #3a5184;
+    color: #fff;
     margin-top: 1rem;
 }
 .btn-edit {

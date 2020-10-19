@@ -93,4 +93,11 @@ export default {
 .secret {
   margin: 2rem 0;
 }
+.is-google {
+  color: #fff;
+  background-color: #4285F4;
+}
+.account {
+  color: #3a5184;
+}
 </style>

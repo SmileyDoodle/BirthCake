@@ -29,7 +29,7 @@ export default {
   padding-bottom: 1rem;
 }
 .contact {
-  color: #dcc9cd;
+  color: #3a5184;
   cursor: pointer;
   opacity: 0.5;
   transition: opacity ease 0.5s;
