@@ -78,4 +78,10 @@ a {
     height: 128px !important;
     position: absolute;
 } */
+
+@media only screen and (min-width: 1024px) {
+#app {
+  min-height: 100vh;
+}
+}
 </style>

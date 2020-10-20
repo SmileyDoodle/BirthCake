@@ -1,11 +1,13 @@
 <template>
-    <div>
-        <div class="main-page">
-            <h1> BirthCake </h1>
-            <p> Keep all the birthdays in one place </p>
-        </div>
-        <div class="img-wrap">
-            <img alt="birthday" src="../assets/images/birthday.png"> 
+    <div class="desktop-main-wrap">
+        <div class="desktop-left-wrap">
+            <div class="main-page">
+                <h1> BirthCake </h1>
+                <p> Keep all the birthdays in one place </p>
+            </div>
+            <div class="img-wrap">
+                <img alt="birthday" src="../assets/images/birthday.png"> 
+            </div>
         </div>
         <div class="main-button">
             <router-link to="/login" tag="button" class="button btn-colour">Login</router-link>
@@ -51,5 +53,44 @@ export default {
 }
 .btn-light-colour {
    background-color: #f2eee8; 
+}
+
+
+@media only screen and (min-width: 1024px) {
+.desktop-main-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.desktop-left-wrap {
+    width: 60%;
+}
+.main-page {
+    width: 80%;
+    padding-top: 0;
+    padding-left: 6rem;
+    padding-right: 0;
+    margin: 0 auto;
+}
+.main-page h1 {
+    font-size: 3.5rem;
+}
+.img-wrap { 
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 1rem;
+}
+.img-wrap img { 
+    width: 70%;
+}
+.main-button {
+    display: flex;
+    width: 30%;
+    margin-left: 0;
+}
+.main-button .button {
+    width: 70%;
+}
 }
 </style> 
