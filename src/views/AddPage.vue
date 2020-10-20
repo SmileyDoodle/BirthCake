@@ -97,10 +97,19 @@ export default {
             this.$refs.fileUpload.click();        
         },
         previewFiles(event) {
-          console.log(event.target.files);
+        //   console.log(event.target.files);
           this.file = event.target.files[0];
           this.url = URL.createObjectURL(this.file);
 
+          const fsize = this.file.size; 
+          const file = Math.round((fsize / 1024)); 
+                // The size of the file. 
+                if (file >= 2048) { 
+                    alert( 
+                      "File too Big, please select a file less than 2mb");
+                    this.file = "";
+                    this.url = "";
+                }
         //   this.uploadPhoto(file)
         },
         async saveUser() {
@@ -164,5 +173,9 @@ export default {
 .btn-submit {
     background-color: #3a5184;
     color: #fff;
+}
+.btn-submit:disabled {
+    background-color: #fff;
+    color: #2c3e50;
 }
 </style>

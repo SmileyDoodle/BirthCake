@@ -24,7 +24,7 @@ export default {
   padding: 2rem; 
 }
 .description {
-  width: 80%;
+  width: 75%;
   margin: 0 auto;
   padding-bottom: 1rem;
 }
