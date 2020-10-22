@@ -43,6 +43,9 @@ html {
 a {
   color: #2c3e50;
 }
+input {
+  -webkit-user-select: auto !important;
+}
 .inputs-button-wrap {
     display: flex;
     justify-content: center;
@@ -76,11 +79,7 @@ a {
     background-clip: content-box;
     border-radius: 50%;
 }
-/* .avatar-styling {
-    object-fit: cover !important;
-    height: 128px !important;
-    position: absolute;
-} */
+
 
 @media only screen and (min-width: 1024px) {
 #app {

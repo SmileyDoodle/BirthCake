@@ -207,5 +207,14 @@ export default {
 .desktop-edit-wrap {
     width: 25%;
 }
+.btn-submit {
+  opacity: 0.8;
+  transition: opacity .3s ease;
+}
+.btn-submit:hover {
+  color: #fff;
+  opacity: 1;
+  transition: opacity .3s ease;
+}
 }
 </style>

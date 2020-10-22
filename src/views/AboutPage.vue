@@ -4,7 +4,7 @@
      <div class="about-wrap">
         <p class="description">With all the hustle and bustle of our daily life, it is easy to forget about some truly important things. However, using BirthCake, you can be sure that you will keep track of all the coming birthdays of your dear people.</p>
         <p class="description">If you like the application, have some ideas how to improve it, or want to collaborate, let's get in touch:</p>
-        <p><a href="mailto:anya.sk.rus@gmail.com" class="contact">contact me</a></p>
+        <a href="mailto:anya.sk.rus@gmail.com" class="button btn-contact">Contact me</a>
      </div>
   </div>
 </template>
@@ -28,15 +28,10 @@ export default {
   margin: 0 auto;
   padding-bottom: 1rem;
 }
-.contact {
-  color: #3a5184;
-  cursor: pointer;
-  opacity: 0.5;
-  transition: opacity ease 0.5s;
-}
-.contact:hover {
-  opacity: 1;
-  transition: opacity ease 0.5s;
+.btn-contact {
+  background-color: #3a5184;
+  color: #fff;
+  margin-top: 1.5rem;
 }
 
 
@@ -47,6 +42,15 @@ export default {
 }
 .description {
   width: 100%;
+}
+.btn-contact {
+  opacity: 0.8;
+  transition: opacity .3s ease;
+}
+.btn-contact:hover {
+  color: #fff;
+  opacity: 1;
+  transition: opacity .3s ease;
 }
 }
 </style>

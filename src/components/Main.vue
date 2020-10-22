@@ -51,6 +51,9 @@ export default {
     background-color: #3a5184;
     color: #fff;
 }
+.btn-colour:hover {
+  color: #fff;
+}
 .btn-light-colour {
    background-color: #f2eee8; 
 }

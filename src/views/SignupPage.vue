@@ -97,6 +97,9 @@ export default {
   color: #fff;
   background-color: #4285F4;
 }
+.is-google:hover {
+  color: #fff;
+}
 .account {
   color: #3a5184;
 }

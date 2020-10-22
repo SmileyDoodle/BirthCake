@@ -135,12 +135,18 @@ export default {
     background-color: #3a5184;
     color: #fff;
 }
+.btn-colour:hover {
+  color: #fff;
+}
 .is-facebook {
   margin-top: 1rem !important;
 }
 .is-google {
   color: #fff;
   background-color: #4285F4;
+}
+.is-google:hover {
+  color: #fff;
 }
 .account {
   color: #3a5184;

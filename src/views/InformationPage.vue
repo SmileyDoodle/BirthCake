@@ -147,6 +147,7 @@ export default {
   display: flex;
   text-align: left;
   margin-top: 1rem;
+  cursor: pointer;
 }
 .birthday-name {
   margin-left: 1rem;
@@ -187,6 +188,15 @@ export default {
 .sticked-button {
   bottom: 70px;
   right: 45px;
+}
+.sticked-button button {
+  opacity: 0.8;
+  transition: opacity .3s ease;
+}
+.sticked-button button:hover {
+  color: #fff;
+  opacity: 1;
+  transition: opacity .3s ease;
 }
 }
 </style>

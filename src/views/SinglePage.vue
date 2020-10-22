@@ -158,9 +158,22 @@ export default {
 }
 .btn-delete {
     margin-top: 2rem;
+    opacity: 0.8;
+    transition: opacity .3s ease;
 }
 .btn-edit {
     margin-top: 2rem;
+    opacity: 0.8;
+    transition: opacity .3s ease;
+}
+.btn-delete:hover {
+  color: #fff;
+  opacity: 1;
+  transition: opacity .3s ease;
+}
+.btn-edit:hover {
+  opacity: 1;
+  transition: opacity .3s ease;
 }
 }
 </style>
