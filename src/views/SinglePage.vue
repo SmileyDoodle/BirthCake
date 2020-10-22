@@ -97,7 +97,6 @@ export default {
     },
     mounted() {
         this.gotUserID = this.$route.params.userID;
-        // console.log('id', this.$route.params.userID);
         this.fetchUser();
     },
 }

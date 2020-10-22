@@ -1,10 +1,6 @@
 <template>
   <div id="app">
     <Header></Header>
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
     <router-view/>
     <Footer></Footer>
   </div>
@@ -68,7 +64,6 @@ input {
 .avatar-styling {
     object-fit: cover !important;
     height: 128px !important;
-    /* position: absolute; */
 }
 .figure {
     display: flex;

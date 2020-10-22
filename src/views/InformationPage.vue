@@ -66,8 +66,6 @@ export default {
     getTime(payload) {
       this.currentYear = payload.year;
       this.currentMonth = payload.month;
-      // console.log('currentYear', this.currentYear);
-      // console.log('cal', payload);
     },
     init() {
 
@@ -78,7 +76,6 @@ export default {
       const uid = firebase.auth().currentUser.uid;
       db.collection("users").doc(uid).collection("birthdays").orderBy('birthdayDay').get().then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
-            // console.log('doc', doc);
             var ms = Number(moment(doc.data().date, 'YYYY'));
             var b = new Date(ms).getFullYear()
             var diff = this.currentYear - b;
@@ -98,7 +95,6 @@ export default {
             }
             this.currentDates.push(new Date(data.yearForDots, data.monthForDots, data.birthdayDay));
             this.users.push(data);
-            // console.log(this.users);
           });
           const dot = {
             dot: {
@@ -124,7 +120,6 @@ export default {
   justify-content: center;
   padding-bottom: 0;
   margin-top: 1rem;
-  /* margin-bottom: 3rem !important; */
 }
 .customShadow {
   margin-top: 0;

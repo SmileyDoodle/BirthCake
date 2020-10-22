@@ -2,6 +2,9 @@
   <div class="login columns is-mobile is-centered">
     <div  class="column is-two-thirds">
       <div class="desktop-login-wrap">
+        <div class="error-msg">
+          <p v-if="err">Wrong credentials</p>
+        </div>
         <div class="inputs-button-wrap">
           <form autocomplete="off" class="login-form">
             <input
@@ -53,6 +56,7 @@ export default {
     return {
       email: "",
       password: "",
+      err: false,
     }
   },
   methods: {
@@ -65,13 +69,36 @@ export default {
           // ...
           // New sign-in will be persisted with session persistence.
           return firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-            .catch(err => {
-              console.log("login err", err);
+            .then((result) => {
+              if (result.user) {
+                this.$router.push({ path: 'information' });
+              }
+            })
+            .catch(() => {
+              this.err = true;
+              setTimeout(()=>{
+                this.err = false
+              }, 1000)
             })
         })
-        .catch(err => {
-              console.log("firebase err", err);
+        .catch(() => {
+              console.log("err");
             })
+    },
+    auth() {
+      firebase.auth().getRedirectResult().then((result) => {
+            if (result.credential) {
+              // This gives you a Google Access Token. You can use it to access the Google API.
+              // eslint-disable-next-line no-unused-vars
+              var token = result.credential.accessToken;          
+              this.$router.push({ path: 'information' });
+            }
+            // The signed-in user info.
+            // eslint-disable-next-line no-unused-vars
+            var user = result.user;
+          }).catch(() => {
+              console.log("err");
+          });
     },
     signinGoogle() {
       let provider = new firebase.auth.GoogleAuthProvider();
@@ -82,49 +109,21 @@ export default {
       firebase.auth().signInWithRedirect(provider);
     }
   },
-  created() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-          this.$router.push({ path: 'information' });
-        } else {
-          console.log("err");
-        }
-      })
-    },
-    mounted() {
-    firebase.auth().getRedirectResult().then((result) => {
-          if (result.credential) {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            // eslint-disable-next-line no-unused-vars
-            var token = result.credential.accessToken;
-            console.log('token ', token);
-            console.log('result.user ', result.user);
-            // ...            
-            this.$router.push({ path: 'information' });
-          }
-          // The signed-in user info.
-          // eslint-disable-next-line no-unused-vars
-          var user = result.user;
-        }).catch(function(error) {
-            console.log('error ', error);
-          // Handle Errors here.
-          // eslint-disable-next-line no-unused-vars
-          var errorCode = error.code;
-          // eslint-disable-next-line no-unused-vars
-          var errorMessage = error.message;
-          // The email of the user's account used.
-          // eslint-disable-next-line no-unused-vars
-          var email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          // eslint-disable-next-line no-unused-vars
-          var credential = error.credential;
-          // ...
-        });
+  mounted() {
+      this.auth();
   }
 }
 </script>
 
 <style>
+.error-msg {
+  height: 1rem;
+  font-size: 0.7rem;
+  color: red;
+}
+.inputs-button-wrap {
+  margin-top: 0.3rem;
+}
 .login-form {
   width: 85%;
 }

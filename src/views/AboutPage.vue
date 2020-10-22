@@ -2,8 +2,8 @@
   <div class="about">
      <h1>About</h1>
      <div class="about-wrap">
-        <p class="description">With all the hustle and bustle of our daily life, it is easy to forget about some truly important things. However, using BirthCake, you can be sure that you will keep track of all the coming birthdays of your dear people.</p>
-        <p class="description">If you like the application, have some ideas how to improve it, or want to collaborate, let's get in touch:</p>
+        <p class="description">With all the hustle and bustle of our daily life, it is easy to forget about some truly important things. However, using <strong>BirthCake</strong>, you can be sure that you will keep track of all the coming birthdays.</p>
+        <p class="description">If you like the application, have some ideas how to improve it, or want to collaborate, let's get in touch.</p>
         <a href="mailto:anya.sk.rus@gmail.com" class="button btn-contact">Contact me</a>
      </div>
   </div>

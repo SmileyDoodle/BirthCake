@@ -109,11 +109,8 @@ export default {
             desertRef.delete()
         },
         previewFiles(event) {
-          console.log(event.target.files);
           this.file = event.target.files[0];
           this.url = URL.createObjectURL(this.file);
-
-        //   this.uploadPhoto(file)
         },
         async updateUser() {
             let db = firebase.firestore();
@@ -146,7 +143,7 @@ export default {
             .then(() => {
                 this.$router.push({name: 'SinglePage', params: { userID: this.recievedUserID }})
             })
-            .catch (error => console.log(error))                
+            .catch (() => console.log("err"))                
         },
         async uploadPhoto(file, timestamp) {
             let storageRef = firebase.storage().ref();
@@ -158,7 +155,6 @@ export default {
     mounted() {
         this.recievedUserID = this.$route.params.userID;
         this.uid = firebase.auth().currentUser.uid;
-        // console.log('userID', this.$route.params.userID);
         this.fetchUser();
     },
 }

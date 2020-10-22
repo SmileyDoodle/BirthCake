@@ -26,9 +26,6 @@
               <span aria-hidden="true"></span>
             </div>
         </div>
-        <!--
-        Using the v-bind: directive to reactively update the class attribute 'is-active' based on the showNav property.
-        -->
         <div 
           class="navbar-menu" 
           :class="{ 'is-active': showNav }"
@@ -69,8 +66,8 @@ export default {
           // Sign-out successful.
           this.$router.go('/')
         }),
-        err => {
-            console.log(err);
+        () => {
+            console.log("err");
           }
       }
   }

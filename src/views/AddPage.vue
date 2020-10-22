@@ -101,7 +101,6 @@ export default {
             this.$refs.fileUpload.click();        
         },
         previewFiles(event) {
-        //   console.log(event.target.files);
           this.file = event.target.files[0];
           this.url = URL.createObjectURL(this.file);
 
@@ -114,7 +113,6 @@ export default {
                     this.file = "";
                     this.url = "";
                 }
-        //   this.uploadPhoto(file)
         },
         async saveUser() {
             this.isLoading = true;
@@ -141,7 +139,7 @@ export default {
             })
             // eslint-disable-next-line no-unused-vars
             .then(docRef => this.$router.push('/information'))
-            .catch (error => console.log(error))                
+            .catch (() => console.log("err"))                
         },
         async uploadPhoto(file, timestamp) {
             let storageRef = firebase.storage().ref();

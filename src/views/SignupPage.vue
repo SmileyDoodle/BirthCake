@@ -54,37 +54,25 @@ export default {
     signupFacebook() {
       let provider = new firebase.auth.FacebookAuthProvider();
       firebase.auth().signInWithRedirect(provider);
+    },
+    auth() {
+      firebase.auth().getRedirectResult().then((result) => {
+            if (result.credential) {
+              // This gives you a Google Access Token. You can use it to access the Google API.
+              // eslint-disable-next-line no-unused-vars
+              var token = result.credential.accessToken;
+              this.$router.push({ path: 'information' });
+            }
+            // The signed-in user info.
+            // eslint-disable-next-line no-unused-vars
+            var user = result.user;
+          }).catch(() => {
+              console.log("err");
+          });
     }
   },
   mounted() {
-    firebase.auth().getRedirectResult().then((result) => {
-          if (result.credential) {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            // eslint-disable-next-line no-unused-vars
-            var token = result.credential.accessToken;
-            // ...
-            console.log('token ', token);
-            console.log('result.user ', result.user);
-            this.$router.push({ path: 'information' });
-          }
-          // The signed-in user info.
-          // eslint-disable-next-line no-unused-vars
-          var user = result.user;
-        }).catch(function(error) {
-            console.log('error ', error);
-          // Handle Errors here.
-          // eslint-disable-next-line no-unused-vars
-          var errorCode = error.code;
-          // eslint-disable-next-line no-unused-vars
-          var errorMessage = error.message;
-          // The email of the user's account used.
-          // eslint-disable-next-line no-unused-vars
-          var email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
-          // eslint-disable-next-line no-unused-vars
-          var credential = error.credential;
-          // ...
-        });
+    this.auth();
   }
 }
 </script>
