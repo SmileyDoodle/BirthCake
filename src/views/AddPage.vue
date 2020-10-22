@@ -139,7 +139,11 @@ export default {
             })
             // eslint-disable-next-line no-unused-vars
             .then(docRef => this.$router.push('/information'))
-            .catch (() => console.log("err"))                
+            .catch (() => {
+                console.log("err");
+                this.isLoading = false;
+                alert("Create an account in order to add and save new data.");
+            })                
         },
         async uploadPhoto(file, timestamp) {
             let storageRef = firebase.storage().ref();

@@ -12,18 +12,20 @@
       <hr class="customShadow">
       <div class="dates-wrap">
         <h3 class="has-text-weight-semibold">This month birthdays:</h3>
-        <div v-for="user in users" :key="user.id">
-          <div class="dates-lp-wrap" v-if="currentMonth === user.month"  @click="goSingle(user.id)">
-              <div>
-                <span class="has-text-weight-semibold">&#183;</span>
-              </div>
-              <div class="birthday-name">
-                <h3> {{user.name}} </h3>
-                <p class="date-age"> 
-                  {{user.checked === false ? user.date : user.shortDate}} 
-                  {{user.checked === false ? "- turns " + user.age + " y.o." : " " }}
-                </p>
-              </div>
+        <div class="scroll-data">
+          <div v-for="user in users" :key="user.id">
+            <div class="dates-lp-wrap" v-if="currentMonth === user.month"  @click="goSingle(user.id)">
+                <div>
+                  <span class="has-text-weight-semibold">&#183;</span>
+                </div>
+                <div class="birthday-name">
+                  <h3> {{user.name}} </h3>
+                  <p class="date-age"> 
+                    {{user.checked === false ? user.date : user.shortDate}} 
+                    {{user.checked === false ? "- turns " + user.age + " y.o." : " " }}
+                  </p>
+                </div>
+            </div>
           </div>
         </div>
       </div>
@@ -126,6 +128,10 @@ export default {
   margin-bottom: 2rem;
   box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.1), 0 0 0 0 rgba(10,10,10,.02);
 }
+.scroll-data {
+  height: 255px;
+  overflow: auto;
+}
 .restyle {
   border-style: none;
   width: 80%;
@@ -172,6 +178,9 @@ export default {
 .restyle {
   border-style: none;
   width: 25%;
+}
+.scroll-data {
+  height: 360px;
 }
 .customShadow {
   width: 30%;

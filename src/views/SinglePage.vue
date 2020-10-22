@@ -85,11 +85,17 @@ export default {
                 const uid = firebase.auth().currentUser.uid;
                 db.collection("users").doc(uid).collection("birthdays").
                     where(firebase.firestore.FieldPath.documentId(), '==', this.$route.params.userID)
-                    .get().then(querySnapshot => {
+                    .get()
+                    .then(querySnapshot => {
                         querySnapshot.forEach((doc) => {
-                            doc.ref.delete().then(()=>{
+                            doc.ref.delete()
+                            .then(()=>{
                                 this.$router.push('/information');
-                            });
+                            })
+                            .catch (() => {
+                                console.log("err");
+                                alert("This is a read-only account. Register to modify data.");
+                            })
                         })
                 })
             }

@@ -128,7 +128,8 @@ export default {
 
             db.collection("users").doc(this.uid).collection("birthdays")
                 .where(firebase.firestore.FieldPath.documentId(), '==', this.$route.params.userID)
-                .get().then(querySnapshot => {
+                .get()
+                .then(querySnapshot => {
                     querySnapshot.forEach( async (doc) => {
                         doc.ref.update ({
                             name: this.name,
@@ -137,13 +138,18 @@ export default {
                             photo: this.currentPhoto,
                             photoName: this.photoName
                         })
+                        .then(() => {
+                            this.$router.push({name: 'SinglePage', params: { userID: this.recievedUserID }})
+                        })
+                        .catch (() => {
+                            console.log("err");
+                            alert("Create an account in order to modify data.");
+                        })
                     })
                 })
-            // eslint-disable-next-line no-unused-vars
-            .then(() => {
-                this.$router.push({name: 'SinglePage', params: { userID: this.recievedUserID }})
-            })
-            .catch (() => console.log("err"))                
+                .catch (() => {
+                    console.log("err");
+                })                   
         },
         async uploadPhoto(file, timestamp) {
             let storageRef = firebase.storage().ref();

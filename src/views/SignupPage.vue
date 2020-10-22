@@ -4,9 +4,9 @@
       <div class="inputs-button-wrap">
          <div class="desktop-signup-wrap">
           <div class="secret">
-            <p>Use these credentials to login:</p>
-            <p> <strong>email:</strong> john.doe@gmail.com </p>
-            <p> <strong>password:</strong> abc123 </p>
+            <p> <strong>Read-only</strong> access:</p>
+            <p> email: john.doe@gmail.com </p>
+            <p> password: abc123 </p>
           </div>
           <button class="button is-facebook social-button" @click="signupFacebook">
             <span class="icon">
