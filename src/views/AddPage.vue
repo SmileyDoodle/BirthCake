@@ -1,6 +1,6 @@
 <template>
   <div class="add-wrap">
-      <div>
+      <div class="desktop-add-wrap">
         <figure class="image is-128x128 figure" @click="upload()" 
             :style="{'background-image': 'url(' + (url ? url : src=require('../assets/images/photo.png')) + ')'}">
             <input type="file" name="thumbnail" id="thubnail" style="display: none" 
@@ -20,7 +20,7 @@
                 autocomplete="off"
                 >
             </p>
-            <p>
+            <p class="chackbox-spacing">
                 <label for="age">Date of birth*</label>
                 <input
                 class="input"
@@ -53,18 +53,22 @@
                     min="0" 
                     placeholder="I wish you...."
                     autocomplete="off"
+                    maxlength="1000"
                     >
                 </textarea>
+                <span v-if="message.length > 975" class="characterLimit"> {{message.length}}/1000</span>
             </p>
         </div>
-        <button
-            class="button btn-submit"
-            :class="{'is-loading': isLoading}"
-            type="submit"
-            :disabled="!name || !date"
-            @click="saveUser()"
-        > Submit 
-        </button>
+        <div class="btn-submit-wrap">
+            <button
+                class="button btn-submit"
+                :class="{'is-loading': isLoading}"
+                type="submit"
+                :disabled="!name || !date"
+                @click="saveUser()"
+            > Submit 
+            </button>
+        </div>
       </div>
   </div>
 </template>
@@ -169,6 +173,19 @@ export default {
 }
 .add-lp-wrap p {
     margin: 1rem 0;
+    width: 100%;
+}
+.chackbox-spacing {
+    margin-bottom: 0 !important;
+}
+.add-lp-wrap p:last-child {
+    display: flex;
+    flex-direction: column;
+    height: 170px;
+}
+.btn-submit-wrap {
+    display: flex;
+    justify-content: flex-end;
 }
 .btn-submit {
     background-color: #3a5184;
@@ -177,5 +194,18 @@ export default {
 .btn-submit:disabled {
     background-color: #fff;
     color: #2c3e50;
+}
+.characterLimit {
+    width: 100%;
+    text-align: right;
+    font-size: 0.7rem;
+    margin-top: 0.3rem;
+}
+
+
+@media only screen and (min-width: 1024px) {
+.desktop-add-wrap {
+    width: 25%;
+}
 }
 </style>

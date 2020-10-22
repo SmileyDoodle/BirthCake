@@ -1,6 +1,6 @@
 <template>
   <div class="edit-wrap">
-      <div>
+      <div class="desktop-edit-wrap">
         <figure class="image is-128x128 figure" @click="upload()" 
             :style="{'background-image': 'url(' + (url ? url : src=require('../assets/images/photo.png')) + ')'}">
             <input type="file" name="thumbnail" id="thubnail" style="display: none" 
@@ -47,16 +47,20 @@
                     min="0" 
                     placeholder="I wish you...."
                     autocomplete="off"
-                    >
+                    maxlength="1000"
+                >
                 </textarea>
+                <span v-if="message.length > 975" class="characterLimit"> {{message.length}}/1000</span>
             </p>
         </div>
-        <button
-            class="button btn-submit"
-            type="submit"
-            @click="updateUser()"
-        > Save 
-        </button>
+        <div class="btn-submit-wrap">
+            <button
+                class="button btn-submit"
+                type="submit"
+                @click="updateUser()"
+            > Save 
+            </button>
+        </div>
       </div>
   </div>
 </template>
@@ -178,8 +182,30 @@ export default {
 .edit-lp-wrap p {
     margin: 1rem 0;
 }
+.edit-lp-wrap p:last-child {
+    display: flex;
+    flex-direction: column;
+    height: 170px;
+}
+.characterLimit {
+    width: 100%;
+    text-align: right;
+    font-size: 0.7rem;
+    margin-top: 0.3rem;
+}
+.btn-submit-wrap {
+    display: flex;
+    justify-content: flex-end;
+}
 .btn-submit {
     background-color: #3a5184;
     color: #fff;
+}
+
+
+@media only screen and (min-width: 1024px) {
+.desktop-edit-wrap {
+    width: 25%;
+}
 }
 </style>

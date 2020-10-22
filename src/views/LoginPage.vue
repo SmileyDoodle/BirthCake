@@ -1,36 +1,38 @@
 <template>
   <div class="login columns is-mobile is-centered">
     <div  class="column is-two-thirds">
-      <div class="inputs-button-wrap">
-        <form autocomplete="off" class="login-form">
-          <input
-            class="button column login-input"
-            name="email"
-            type="email"
-            placeholder="Email"
-            v-model="email"
-          />
-          <input
-            class="button column login-input"
-            name="password"
-            type="password"
-            placeholder="Password"
-            v-model="password"
-          />
-          <button class="button btn-colour" @click="login" type="button">Login</button>
-          <button class="button is-facebook social-button" @click="signinFacebook" type="button">
-            <span class="icon">
-              <i class="fab fa-facebook"></i>
-            </span>
-            <span>Facebook</span>
-          </button>
-          <button class="button is-google social-button" @click="signinGoogle" type="button"> 
-            <span class="icon">
-              <i class="fab fa-google"></i>
-            </span>
-            <span>Google</span>
-          </button>
-        </form>
+      <div class="desktop-login-wrap">
+        <div class="inputs-button-wrap">
+          <form autocomplete="off" class="login-form">
+            <input
+              class="button column login-input"
+              name="email"
+              type="email"
+              placeholder="Email"
+              v-model="email"
+            />
+            <input
+              class="button column login-input"
+              name="password"
+              type="password"
+              placeholder="Password"
+              v-model="password"
+            />
+            <button class="button btn-colour" @click="login" type="button">Login</button>
+            <button class="button is-facebook social-button" @click="signinFacebook" type="button">
+              <span class="icon">
+                <i class="fab fa-facebook"></i>
+              </span>
+              <span>Facebook</span>
+            </button>
+            <button class="button is-google social-button" @click="signinGoogle" type="button"> 
+              <span class="icon">
+                <i class="fab fa-google"></i>
+              </span>
+              <span>Google</span>
+            </button>
+          </form>
+        </div>
       </div>
       <p>Need an account? <router-link to="/signup" class="account">Sign up</router-link></p>
     </div>
@@ -142,5 +144,16 @@ export default {
 }
 .account {
   color: #3a5184;
+}
+
+
+@media only screen and (min-width: 1024px) {
+.desktop-login-wrap {
+  width: 30%;
+  margin: 0 auto;
+}
+.login-form {
+  width: 100%;
+}
 }
 </style>

@@ -38,4 +38,15 @@ export default {
   opacity: 1;
   transition: opacity ease 0.5s;
 }
+
+
+@media only screen and (min-width: 1024px) {
+.about {
+    width: 25%;
+    margin: 0 auto;
+}
+.description {
+  width: 100%;
+}
+}
 </style>

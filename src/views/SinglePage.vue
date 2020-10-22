@@ -147,4 +147,20 @@ export default {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
 }
+
+
+@media only screen and (min-width: 1024px) {
+.details-wrap {
+    width: 25%;
+}
+.btn-wrap {
+    width: 25%;
+}
+.btn-delete {
+    margin-top: 2rem;
+}
+.btn-edit {
+    margin-top: 2rem;
+}
+}
 </style>

@@ -170,4 +170,23 @@ export default {
 .customDot {
   background-color: #3a5184;
 }
+
+
+@media only screen and (min-width: 1024px) {
+.restyle {
+  border-style: none;
+  width: 25%;
+}
+.customShadow {
+  width: 30%;
+  margin: 0 auto 2rem;
+}
+.dates-wrap {
+  width: 25%;
+}
+.sticked-button {
+  bottom: 70px;
+  right: 45px;
+}
+}
 </style>

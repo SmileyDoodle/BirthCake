@@ -89,10 +89,18 @@ export default {
   justify-content: center;
   align-items: center;
   margin-left: 1rem;
+  z-index: 1;
 }
 .navbar-menu {
   position: absolute;
   width: 100%;
   opacity: 0.95;
+}
+
+
+@media only screen and (min-width: 1024px) {
+#header {
+  padding: 1rem 2rem;
+}
 }
 </style>

@@ -2,7 +2,7 @@
   <div class="register columns is-mobile is-centered">
     <div  class="column is-two-thirds">
       <div class="inputs-button-wrap">
-         <div>
+         <div class="desktop-signup-wrap">
           <div class="secret">
             <p>Use these credentials to login:</p>
             <p> <strong>email:</strong> john.doe@gmail.com </p>
@@ -99,5 +99,12 @@ export default {
 }
 .account {
   color: #3a5184;
+}
+
+
+@media only screen and (min-width: 1024px) {
+.desktop-signup-wrap {
+  width: 30%;
+}
 }
 </style>
