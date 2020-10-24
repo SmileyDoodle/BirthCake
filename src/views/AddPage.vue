@@ -150,6 +150,11 @@ export default {
             const uid = firebase.auth().currentUser.uid;
             let ref = storageRef.child('avatar/' + uid + '/' + timestamp + file.name);
             await ref.put(file)
+            .catch (() => {
+                console.log("err");
+                this.isLoading = false;
+                alert("Create an account in order to add and save new data.");
+            })  
             return ref;
         }
     }

@@ -10,11 +10,10 @@ export default {
 }
 </script>
 
-<style>
-footer {
-    height: 30px;
-}
+<style scoped>
 footer p {
     font-size: 0.7rem;
+    height: 100%;
+    padding: 2rem 0 1rem;
 }
 </style>
