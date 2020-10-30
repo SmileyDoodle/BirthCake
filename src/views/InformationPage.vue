@@ -110,8 +110,14 @@ export default {
       });
     }
   },
-  mounted() {
-    this.init()
+  watch: {
+    currentYear: {
+        handler: function() {
+              this.init();        
+        },
+        deep: true
+        
+    }
   }
 }
 </script>
